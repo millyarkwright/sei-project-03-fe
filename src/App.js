@@ -1,12 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from './logo.svg'
+import './App.css'
+import Homepage from './components/Homepage'
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+
 
 function App() {
   return (
     <div className="App">
-      <h1>Tinder for Movies</h1>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element= {<Homepage/>}></Route>
+        </Routes>
+      </BrowserRouter>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
