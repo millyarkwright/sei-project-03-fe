@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Dashboard from './components/Dashboard'
 import StickyFooterBar from './components/StickyFooterBar'
 import Login from './components/Login'
+import Register from './components/Register'
 
 
 function App() {
@@ -15,7 +16,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Homepage />}></Route>
             <Route path="/dashboard" element={<Dashboard />}></Route>
-            <Route path="login" element={<Login></Login>}></Route>
+            {/* <Route path="login" element={<Login></Login>}></Route> */}
+            <Route path="register" element={<Register></Register>}></Route>
           </Routes>
         </BrowserRouter>
       </div>
