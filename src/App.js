@@ -4,8 +4,8 @@ import Homepage from './components/Homepage'
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Dashboard from './components/Dashboard'
 import StickyFooterBar from './components/StickyFooterBar'
-import Login from './components/Login'
-import Register from './components/Register'
+import Login from './components/auth/Login'
+import Register from './components/auth/Register'
 import MovieInfo from './components/movies/MovieInfo'
 import MovieSwiping from './components/MovieSwiping'
 
