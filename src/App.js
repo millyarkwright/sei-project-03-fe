@@ -1,10 +1,10 @@
 import logo from './logo.svg'
-import './App.css'
+// import './App.css'
 import Homepage from './components/Homepage'
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Dashboard from './components/Dashboard'
 import StickyFooterBar from './components/StickyFooterBar'
-
+import MovieInfo from './components/movies/MovieInfo'
 
 function App() {
   return (
@@ -12,8 +12,9 @@ function App() {
       <div className="App">
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Homepage />}></Route>
-            <Route path="/dashboard" element={<Dashboard />}></Route>
+            <Route path="/" element={<Homepage />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/movies/:movieId" element={<MovieInfo />} />
           </Routes>
         </BrowserRouter>
       </div>
