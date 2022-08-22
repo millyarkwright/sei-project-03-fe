@@ -6,6 +6,9 @@ const Login = () => {
 
   const navigate = useNavigate()
 
+  const [isError, setIsError] = useState(false)
+  const [errorMessage, setErrorMessage] = useState("")
+
   const [userData, setUserData] = useState({username:"", password:""})
 
   const handleFieldChange = (event) => {
@@ -14,7 +17,6 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-
     try {
       const response = await axios.post("http://localhost:4500/login", userData)
       const { token } = response.data
@@ -22,6 +24,8 @@ const Login = () => {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
       navigate("/dashboard")
     } catch (error) {
+      setErrorMessage(error.response.data.message)
+      setIsError(true)
       console.log(error)
     }
   }
@@ -33,6 +37,7 @@ const Login = () => {
         <input type="text" name="username" placeholder="Your username" value={userData.username} onChange={() => handleFieldChange(event)}/>
         <input type="password" name="password" placeholder="Your password" value={userData.password} onChange={() => handleFieldChange(event)} />
         <button type="submit">Log In</button>
+        {isError && errorMessage}
       </form>
     </>
   )
