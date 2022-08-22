@@ -5,7 +5,7 @@ import { Buffer } from 'buffer'
 // setting token
 
 export const setToken = (token) => {
-  window.localStorage.setItem('sei-project-3'), token)
+  window.localStorage.setItem('sei-project-3', token)
 }
 
 // getting token

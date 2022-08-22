@@ -1,26 +1,37 @@
+// Import Hooks
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+
+// Import Axios
 import axios from "axios"
-import { Navigate, useNavigate } from "react-router-dom"
+
+// Import Helpers
+import { setToken } from '../helpers/auth'
+
 
 const Login = () => {
 
+  // Navigation
   const navigate = useNavigate()
 
-
-  const [userData, setUserData] = useState({username:"", password:""})
+  // State
+  const [userData, setUserData] = useState({
+    username:'', 
+    password:''
+  })
   const [isError, setIsError] = useState(false)
-  const [errorMessage, setErrorMessage] = useState("")
+  const [errorMessage, setErrorMessage] = useState('')
 
   const handleFieldChange = (event) => {
     setUserData({ ...userData, [event.target.name]: event.target.value })
   }
 
-
+  // Execution
   const handleSubmit = async (event) => {
     event.preventDefault()
 
     try {
-      const response = await axios.post("http://localhost:4000/login", userData)
+      const response = await axios.post("http://localhost:4500/login", userData)
       const { token } = response.data
       localStorage.setItem("token", token)
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
