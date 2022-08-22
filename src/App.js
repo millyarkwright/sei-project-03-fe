@@ -7,6 +7,7 @@ import StickyFooterBar from './components/StickyFooterBar'
 import Login from './components/Login'
 import Register from './components/Register'
 import MovieInfo from './components/movies/MovieInfo'
+import MovieSwiping from './components/MovieSwiping'
 
 function App() {
   return (
