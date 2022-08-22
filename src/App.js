@@ -7,6 +7,7 @@ import StickyFooterBar from './components/StickyFooterBar'
 import Login from './components/auth/Login'
 import Register from './components/auth/Register'
 import MovieInfo from './components/movies/MovieInfo'
+import MovieSwiping from './components/MovieSwiping'
 
 function App() {
   return (
@@ -18,8 +19,9 @@ function App() {
             <Route path="/" element={<Homepage />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/movies/:movieId" element={<MovieInfo />} />
-            <Route path="login" element={<Login></Login>}></Route>
-            <Route path="register" element={<Register></Register>}></Route>
+            <Route path="/login" element={<Login></Login>}></Route>
+            <Route path="/register" element={<Register></Register>}></Route>
+            <Route path="/swipe/:userId" element={<MovieSwiping></MovieSwiping>}></Route>
           </Routes>
         </BrowserRouter>
       </div>
