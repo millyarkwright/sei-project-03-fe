@@ -5,7 +5,7 @@ import { Buffer } from 'buffer'
 // setting token
 
 export const setToken = (token) => {
-  window.localStorage.setItem('sei-project-3'), token)
+  window.localStorage.setItem('sei-project-3', token)
 }
 
 // getting token
@@ -28,6 +28,7 @@ export const getPayload = () => {
 
 export const userIsAuthenticated = () => {
   const payload = getPayload()
+  console.log(payload)
   if (!payload) return
   const currentTime = Math.round(Date.now() / 1000)
   return currentTime < payload.exp
