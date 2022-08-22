@@ -4,6 +4,7 @@ import Homepage from './components/Homepage'
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Dashboard from './components/Dashboard'
 import StickyFooterBar from './components/StickyFooterBar'
+import Login from './components/Login'
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Homepage />}></Route>
             <Route path="/dashboard" element={<Dashboard />}></Route>
+            <Route path="login" element={<Login></Login>}></Route>
           </Routes>
         </BrowserRouter>
       </div>
