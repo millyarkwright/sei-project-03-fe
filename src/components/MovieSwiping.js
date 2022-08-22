@@ -13,10 +13,12 @@ const MovieSwiping = () => {
   const [likedMovies, setLikedMovies] = useState([])
   const [movieId, setMovieId] = useState([])
   const [dislikedMovies, setDislikedMovies] = useState([])
+  const [movieDisplayedToUser, setMovieDisplayedToUser] = useState('')
+  const [errors, setErrors] = useState('')
 
   const handleButtonClick = (event) => {
     (event.target.value === 'yes') ? console.log('yes') : console.log('no')
-    // console.log(event.target.value)
+    setMovieOrderIndex(movieOrderIndex+1)
   }
 
   useEffect(() => {
@@ -53,9 +55,25 @@ const MovieSwiping = () => {
   console.log('typeof allMovies', typeof allMovies)
   console.log('movieId', movieId)
 
+  // console.log(movieOrderIndex)
+
+  useEffect(()=>{
+    const getDisplayMovieData = async () => {
+      try {
+        const { data } = await axios.get(`http://localhost:4000/movies/${movieId[movieOrderIndex]}`)
+        console.log('data->', data)
+        setMovieDisplayedToUser(data)
+      } catch (error) {
+        console.log('error->',error)
+        setErrors(error)
+      }
+    }
+    getDisplayMovieData()
+  }, [movieOrderIndex])
+
   return (
     <> 
-      <h2>Select Movie You Like</h2>
+      <h2>{movieDisplayedToUser.name}</h2>
       {userIsAuthenticated ? console.log("logged in") : console.log("logged out")}
       <div>
         <p>movie div</p>
