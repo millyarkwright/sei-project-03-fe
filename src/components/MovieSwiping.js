@@ -10,6 +10,7 @@ const MovieSwiping = () => {
   const [userData, setUserData] = useState([])
   const [allMovies, setAllMovies] = useState('')
   const [likedMovies, setLikedMovies] = useState([])
+  const [movieId, setMovieId] = useState([])
   const [dislikedMovies, setDislikedMovies] = useState([])
 
   const handleButtonClick = (event) => {
@@ -40,6 +41,9 @@ const MovieSwiping = () => {
       try {
         const { data } = await axios.get("http://localhost:4000/movies/")
         setAllMovies(data)
+        let movieMappedId = data.map(movie=>movie._id)
+        setMovieId(movieMappedId)
+        // setMovieId(movieMappedId)
       } catch (error) {
         console.log(error)
       }
@@ -62,16 +66,23 @@ const MovieSwiping = () => {
     }
     getUserData()
   }, [])
+
+  // useEffect(() => {
+  //   try{
+  //   const movieMap = (allMovies.map(movie=>movie._id)) 
+  //     setMovieId(movieMap)
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // },[allMovies])
   
 
   console.log(likedMovies)
   console.log(dislikedMovies)
   console.log('allMovies', allMovies)
   console.log('typeof allMovies', typeof allMovies)
-
-  allMovies.map(movie=>movie._id)
-
-  console.log(allMovies)
+  console.log('movieId', movieId)
+  // console.log(allMovies.map(movie=>movie._id))
 
   return (
     <> 
