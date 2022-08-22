@@ -18,8 +18,9 @@ function App() {
             <Route path="/" element={<Homepage />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/movies/:movieId" element={<MovieInfo />} />
-            <Route path="login" element={<Login></Login>}></Route>
-            <Route path="register" element={<Register></Register>}></Route>
+            <Route path="/login" element={<Login></Login>}></Route>
+            <Route path="/register" element={<Register></Register>}></Route>
+            <Route path="/swipe/:userId" element={<MovieSwiping></MovieSwiping>}></Route>
           </Routes>
         </BrowserRouter>
       </div>
