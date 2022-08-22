@@ -15,7 +15,8 @@ const MovieSwiping = () => {
   const [dislikedMovies, setDislikedMovies] = useState([])
 
   const handleButtonClick = (event) => {
-    console.log(event.target.value)
+    (event.target.value === 'yes') ? console.log('yes') : console.log('no')
+    // console.log(event.target.value)
   }
 
   useEffect(() => {
