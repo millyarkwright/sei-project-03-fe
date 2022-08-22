@@ -8,7 +8,6 @@ import axios from "axios"
 // Import Helpers
 import { setToken } from '../helpers/auth'
 
-
 const Login = () => {
 
   // Navigation
@@ -31,10 +30,10 @@ const Login = () => {
     event.preventDefault()
 
     try {
-      const response = await axios.post("http://localhost:4500/login", userData)
-      const { token } = response.data
-      localStorage.setItem("token", token)
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
+      const { data } = await axios.post("http://localhost:4500/login", userData)
+      // console.log('data->', data)
+      const { token } = data
+      setToken(token)
       navigate("/dashboard")
     } catch (error) {
       console.log(error.message)

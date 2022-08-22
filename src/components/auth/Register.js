@@ -11,15 +11,17 @@ const Register = () => {
     email : '',
     username : '',
     password : '',
-    confirmedPassword : '',
+    confirmPassword : '',
     // moviesLiked : '',
   })
   const [error, setError ] = useState('')
+
   const handleChange = (event) => {
     const newObj = { ...formData, [event.target.name]: event.target.value }
     setFormData(newObj)
     setError('')
   }
+
   const handleSubmit = async (event) => {
     event.preventDefault()
     try {
@@ -45,8 +47,8 @@ const Register = () => {
           <label htmlFor="password">Password</label>
           <input onChange={handleChange} type="password" name="password" placeholder='Password' value={formData.password} />
           {/* Password Confirmation */}
-          <label htmlFor="confirmedPassword">Confirm Password</label>
-          <input onChange={handleChange} type="password" name="confirmedPassword" placeholder='Confirm Password' value={formData.confirmedPassword} />
+          <label htmlFor="confirmPassword">Confirm Password</label>
+          <input onChange={handleChange} type="password" name="confirmPassword" placeholder='Confirm Password' value={formData.confirmedPassword} />
           {/* Error Message */}
           { error && <p>{error}</p>}
           {/* Submit */}

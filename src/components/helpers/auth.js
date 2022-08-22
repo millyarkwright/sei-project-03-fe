@@ -5,13 +5,14 @@ import { Buffer } from 'buffer'
 // setting token
 
 export const setToken = (token) => {
-  window.localStorage.setItem('sei-project-3', token)
+  window.localStorage.setItem('moviematch', token)
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
 }
 
 // getting token
 
 export const getToken = () => {
-  return window.localStorage.getItem('sei-project-3')
+  return window.localStorage.getItem('moviematch')
 }
 
 // verify token by checking it exists and is JWT, aiming to return payload as object
@@ -28,7 +29,7 @@ export const getPayload = () => {
 
 export const userIsAuthenticated = () => {
   const payload = getPayload()
-  console.log(payload)
+  console.log('payload->',payload)
   if (!payload) return
   const currentTime = Math.round(Date.now() / 1000)
   return currentTime < payload.exp
