@@ -3,7 +3,10 @@ import { useNavigate } from 'react-router-dom'
 
 import axios from 'axios'
 
-// import { apiRequest } from '../helpers/auth'
+// Import React Bootstrap 
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+
 
 const Register = () => {
   const navigate = useNavigate()
@@ -34,7 +37,9 @@ const Register = () => {
     }
   }
   return (
-    <main>
+    <main className='formPage'>
+      <Container>
+        <Row>
         <form onSubmit={handleSubmit}>
           <h3>Register</h3>
           {/* Username */}
@@ -54,6 +59,8 @@ const Register = () => {
           {/* Submit */}
           <input type="submit" value="Register" />
         </form>
+        </Row>
+      </Container>
     </main>
   )
 }

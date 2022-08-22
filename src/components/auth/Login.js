@@ -2,6 +2,10 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
+// Import React Bootstrap
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+
 // Import Axios
 import axios from "axios"
 
@@ -43,15 +47,19 @@ const Login = () => {
   }
 
   return (
-    <>
-      <h1>Login for your account</h1>
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="username" placeholder="Your username" value={userData.username} onChange={handleFieldChange}/>
-        <input type="password" name="password" placeholder="Your password" value={userData.password} onChange={handleFieldChange} />
-        <button type="submit">Log In</button>
-        {isError && errorMessage}
-      </form>
-    </>
+    <main className='formPage'>
+      <Container>
+        <Row>
+          <h1>Login for your account</h1>
+        <form onSubmit={handleSubmit}>
+          <input type="text" name="username" placeholder="Your username" value={userData.username} onChange={handleFieldChange}/>
+          <input type="password" name="password" placeholder="Your password" value={userData.password} onChange={handleFieldChange} />
+          <button type="submit">Log In</button>
+          {isError && errorMessage}
+        </form>
+        </Row>
+      </Container>
+    </main>
   )
 
 }
