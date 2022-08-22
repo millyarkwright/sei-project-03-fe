@@ -17,7 +17,8 @@ const MovieSwiping = () => {
   const [errors, setErrors] = useState('')
 
   const handleButtonClick = (event) => {
-    (event.target.value === 'yes') ? console.log('yes') : console.log('no')
+    (event.target.value === 'yes') ? setLikedMovies(...likedMovies, movieId[movieOrderIndex]) : setDislikedMovies(...dislikedMovies, movieId[movieOrderIndex])
+    // not working yet
     setMovieOrderIndex(movieOrderIndex+1)
   }
 
@@ -49,8 +50,8 @@ const MovieSwiping = () => {
     }
     getUserData()
   }, [])
-  console.log(likedMovies)
-  console.log(dislikedMovies)
+  console.log('likedMovies', likedMovies)
+  console.log('dislikedMovies', dislikedMovies)
   console.log('allMovies', allMovies)
   console.log('typeof allMovies', typeof allMovies)
   console.log('movieId', movieId)
@@ -74,13 +75,13 @@ const MovieSwiping = () => {
   return (
     <> 
       <h2>{movieDisplayedToUser.name}</h2>
-      {userIsAuthenticated ? console.log("logged in") : console.log("logged out")}
+      {/* {userIsAuthenticated ? console.log("logged in") : console.log("logged out")} */}
       <div>
         <p>movie div</p>
 
       </div>
-      <button value="yes" onClick={handleButtonClick} >Like</button>
-      <button value="no" onClick={handleButtonClick} >Dislike</button>
+      <button value="no" onClick={handleButtonClick} >❌</button>
+      <button value="yes" onClick={handleButtonClick} >✅</button>
     </>
   )
 }
