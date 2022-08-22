@@ -33,5 +33,11 @@ export const userIsAuthenticated = () => {
   return currentTime < payload.exp
 }
 
+// export const userIsOwner = () => {
+//   const payload = getPayload()
+//   if (!payload) return
+//   return payload.sub === ._id
+// }
+
 
 
