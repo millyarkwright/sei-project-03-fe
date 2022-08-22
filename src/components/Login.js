@@ -7,11 +7,14 @@
 //   const navigate = useNavigate()
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //   const [userData, setUserData] = useState({username:"", password:""})
 =======
   const [isError, setIsError] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
 
+=======
+>>>>>>> parent of 4702d3b (added error handling)
   const [userData, setUserData] = useState({username:"", password:""})
 >>>>>>> 4702d3ba89734a396df45ea51e9746f009927992
 
@@ -48,6 +51,7 @@
 =======
   const handleSubmit = async (event) => {
     event.preventDefault()
+
     try {
       const response = await axios.post("http://localhost:4500/login", userData)
       const { token } = response.data
@@ -55,8 +59,6 @@
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
       navigate("/dashboard")
     } catch (error) {
-      setErrorMessage(error.response.data.message)
-      setIsError(true)
       console.log(error)
     }
   }
@@ -68,7 +70,6 @@
         <input type="text" name="username" placeholder="Your username" value={userData.username} onChange={() => handleFieldChange(event)}/>
         <input type="password" name="password" placeholder="Your password" value={userData.password} onChange={() => handleFieldChange(event)} />
         <button type="submit">Log In</button>
-        {isError && errorMessage}
       </form>
     </>
   )
