@@ -31,7 +31,7 @@ const Login = () => {
     event.preventDefault()
 
     try {
-      const response = await axios.post("http://localhost:4500/login", userData)
+      const response = await axios.post("http://localhost:4000/login", userData)
       const { token } = response.data
       localStorage.setItem("token", token)
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
