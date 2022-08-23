@@ -1,6 +1,7 @@
 // Import Hooks
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { API_URL } from "../../config.js"
 
 // Import React Bootstrap
 import Container from 'react-bootstrap/Container'
@@ -34,7 +35,7 @@ const Login = () => {
     event.preventDefault()
 
     try {
-      const { data } = await axios.post("http://localhost:4500/login", userData)
+      const { data } = await axios.post(`${API_URL}/login`, userData)
       // console.log('data->', data)
       const { token } = data
       setToken(token)
