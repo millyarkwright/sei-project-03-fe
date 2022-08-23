@@ -29,8 +29,10 @@ const MovieSwiping = () => {
     // (event.target.value === 'yes') ? updateMovieLikedPreferences() : updateMoviesDislikedPreferences()
     
     if (event.target.name === "moviesLiked") {
-        userPreferences.moviesLiked.push(allMovieIds[count])
-      console.log('userPreferences ->',userPreferences )
+      userPreferences.moviesLiked.push(allMovieIds[count])
+      
+      // setUserPreferences(newLikes)
+      // console.log('userPreferences ->',userPreferences )
 
     //   setUserPreferences(userPreferences.moviesLiked.push[count])
     //  } else { 
@@ -43,11 +45,14 @@ const MovieSwiping = () => {
     // const newObj = { userPreferences.[event.target.name].push[movieId[count]] }
     // console.log('newObj->',newObj)
     // setUserPreferences(newObj)
+  } else { 
+    const newDislikes = userPreferences.moviesDisliked.push(allMovieIds[count])
+    console.log('newlikes', newDislikes)
+    // setUserPreferences(newDislikes)
+    // console.log('userPreferences ->',userPreferences )
+    }
+
     setCount(count + 1)
-  } else 
-  { userPreferences.moviesDisliked.push(allMovieIds[count])
-    console.log('userPreferences ->',userPreferences )
-    setCount(count + 1)}
   }
 
   // console.log('userpref->',userPreferences)
@@ -56,6 +61,7 @@ const MovieSwiping = () => {
     const getUserData = async () => {
       try {
         const { data } = await axios.get(`${API_URL}/profile`)
+        console.log('userdata', data)
         setUserData(data)
         // setUserPreferences(data.moviesLiked)
         // setUserPreferences(data.moviesDisliked)
@@ -66,17 +72,20 @@ const MovieSwiping = () => {
     getUserData()
   }, [])
 
+
   useEffect(() => {
     const updateDb = async () => {
       try {
-        const { data } = await axios.post(`${API_URL}/`, userPreferences)
-        console.log('DATA ->', data)
+        console.log('userpreferences in updatedb useeffect', userPreferences)
+        const { data } = await axios.post(`${API_URL}/profile/preferences`, userPreferences)
+        console.log('updatedb - DATA ->', data)
       } catch (error) {
         // console.log(error)
         setErrors(error)
       }
     }
-  },[userPreferences])
+    updateDb()
+  },[count])
 
   // ! Get all movie data & movie Ids
   useEffect(() => {
@@ -125,14 +134,14 @@ const MovieSwiping = () => {
           console.log('userPreferences',userPreferences)
           console.log('typeof userPreferences.moviesLiked',typeof userPreferences.moviesLiked)
           console.log('movieId',allMovieIds)
-        if (userPreferences.moviesLiked.includes(allMovieIds[count]) || userPreferences.moviesDisliked.includes(allMovieIds[count])) {
-          setCount(count+1)
-        } else {
+        // if (userPreferences.moviesLiked.includes(allMovieIds[count]) || userPreferences.moviesDisliked.includes(allMovieIds[count])) {
+        //   setCount(count+1)
+        // } else {
           const { data } = await axios.get(`${API_URL}/movies/${allMovieIds[count]}`)
           console.log('data->', data)
 
           setMovieDisplayedToUser(data)
-        }   
+        // }   
       } catch (error) {
         console.log('error->',error)
         setErrors(error)
@@ -147,7 +156,7 @@ const MovieSwiping = () => {
       {/* <div className='moviePicture'> <img src = { movieDisplayedToUser.image_url } alt="Movie Poster"></img> </div> */}
       <p> { movieDisplayedToUser.year } </p>
       <p> { movieDisplayedToUser.genre } </p>
-      {userIsAuthenticated ? console.log("logged in") : console.log("logged out")}
+      {/* {userIsAuthenticated ? console.log("logged in") : console.log("logged out")} */}
       <div>
         <p>movie div</p>
         <p>moviesLiked { userPreferences.moviesLiked }</p>
