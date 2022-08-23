@@ -71,7 +71,7 @@ const MovieSwiping = () => {
   useEffect(()=>{
     const getDisplayMovieData = async () => {
       try {
-
+          // if movieOrderIndex === movieId.length then it will break, so we need at a catch for that to say no more movies, please wait for updates
         if (likedMovies.includes(movieId[movieOrderIndex]) || dislikedMovies.includes(movieId[movieOrderIndex])) {
           setMovieOrderIndex(movieOrderIndex+1)
         } else {
