@@ -39,7 +39,7 @@ const Login = () => {
       // console.log('data->', data)
       const { token } = data
       setToken(token)
-      navigate("/dashboard")
+      navigate("/swipe")
     } catch (error) {
       console.log(error.message)
       setIsError(true)

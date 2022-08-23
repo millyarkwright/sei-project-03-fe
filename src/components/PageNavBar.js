@@ -15,7 +15,7 @@ const PageNavBar = () => {
 const navigate = useNavigate()
 
 const handleLogout = () => {
-  window.localStorage.removeItem('moviematch')
+  window.localStorage.removeItem('token')
   navigate('/login')
 }
   return (
@@ -27,7 +27,7 @@ const handleLogout = () => {
           { userIsAuthenticated()
           ?
           <>
-            <Nav.Link as={Link} to='/swipe/:userId'>Movie Swipe</Nav.Link>
+            <Nav.Link as={Link} to='/swipe'>Movie Swipe</Nav.Link>
             <Nav.Link as={Link} to='/moviematch'>Movie Match</Nav.Link>
             <Nav.Link as={Link} to='/'>Profile</Nav.Link>
             <span onClick={handleLogout}>Logout</span>

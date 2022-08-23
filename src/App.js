@@ -8,6 +8,7 @@ import Login from './components/auth/Login'
 import Register from './components/auth/Register'
 import MovieInfo from './components/movies/MovieInfo'
 import MovieSwiping from './components/MovieSwiping'
+import Match from './components/movies/MovieMatch'
 
 function App() {
   return (
@@ -21,7 +22,8 @@ function App() {
             <Route path="/movies/:movieId" element={<MovieInfo />} />
             <Route path="/login" element={<Login></Login>}></Route>
             <Route path="/register" element={<Register></Register>}></Route>
-            <Route path="/swipe/:userId" element={<MovieSwiping></MovieSwiping>}></Route>
+            <Route path="/swipe" element={<MovieSwiping></MovieSwiping>}></Route>
+            <Route path="/match" element={<Match></Match>}></Route>
           </Routes>
         </BrowserRouter>
       </div>

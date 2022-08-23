@@ -5,14 +5,14 @@ import { Buffer } from 'buffer'
 // setting token
 
 export const setToken = (token) => {
-  window.localStorage.setItem('moviematch', token)
+  window.localStorage.setItem('token', token)
   axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
 }
 
 // getting token
 
 export const getToken = () => {
-  return window.localStorage.getItem('moviematch')
+  return window.localStorage.getItem('token')
 }
 
 // verify token by checking it exists and is JWT, aiming to return payload as object
@@ -23,6 +23,13 @@ export const getPayload = () => {
   const splitToken = token.split('.')
   if (splitToken.length !==3) return
   return JSON.parse(Buffer.from(splitToken[1], 'base64'))
+}
+
+
+export const getUserName = () => {
+  const payload = getPayload()
+  const { username } = payload
+  return username
 }
 
 // check that expiry date is in the future
