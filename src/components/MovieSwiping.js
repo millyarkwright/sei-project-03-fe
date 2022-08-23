@@ -18,9 +18,11 @@ const MovieSwiping = () => {
 
   const handleButtonClick = (event) => {
     (event.target.value === 'yes') ? setLikedMovies(...likedMovies, movieId[movieOrderIndex]) : setDislikedMovies(...dislikedMovies, movieId[movieOrderIndex])
-    // not working yet
+    //  above not working yet
     setMovieOrderIndex(movieOrderIndex+1)
   }
+  console.log('movieId[movieOrderIndex]', movieId[movieOrderIndex])
+  console.log('movieOrderIndex', movieOrderIndex)
 
   useEffect(() => {
     const pullMovies = async () => {
@@ -50,11 +52,11 @@ const MovieSwiping = () => {
     }
     getUserData()
   }, [])
-  console.log('likedMovies', likedMovies)
-  console.log('dislikedMovies', dislikedMovies)
-  console.log('allMovies', allMovies)
-  console.log('typeof allMovies', typeof allMovies)
-  console.log('movieId', movieId)
+  // console.log('likedMovies', likedMovies)
+  // console.log('dislikedMovies', dislikedMovies)
+  // console.log('allMovies', allMovies)
+  // console.log('typeof allMovies', typeof allMovies)
+  // console.log('movieId', movieId)
 
   // console.log(movieOrderIndex)
 
