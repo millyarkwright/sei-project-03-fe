@@ -50,11 +50,11 @@ const Login = () => {
     <main className='formPage'>
       <Container>
         <Row>
-          <h1>Login for your account</h1>
         <form onSubmit={handleSubmit}>
+          <h1>Login</h1>
           <input type="text" name="username" placeholder="Your username" value={userData.username} onChange={handleFieldChange}/>
           <input type="password" name="password" placeholder="Your password" value={userData.password} onChange={handleFieldChange} />
-          <button type="submit">Log In</button>
+          <input type="submit" value="Login" className='btn w-100'/>
           {isError && errorMessage}
         </form>
         </Row>

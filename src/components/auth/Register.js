@@ -57,7 +57,7 @@ const Register = () => {
           {/* Error Message */}
           { error && <p>{error}</p>}
           {/* Submit */}
-          <input type="submit" value="Register" />
+          <input type="submit" value="Register" className='btn w-100'/>
         </form>
         </Row>
       </Container>
