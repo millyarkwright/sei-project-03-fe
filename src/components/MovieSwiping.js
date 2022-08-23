@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
 import { useParams } from "react-router-dom"
+import { API_URL } from "../config.js"
 
 import { userIsAuthenticated } from "./helpers/auth"
 
@@ -19,7 +20,7 @@ const MovieSwiping = () => {
   const updateLikedMoviePreferences = async () => {
     setLikedMovies([...likedMovies, movieId[movieOrderIndex]])
     try {
-      const res = await axios.put("http://localhost:4500/swipe/:userId", likedMovies)
+      const res = await axios.put(`${API_URL}/swipe/:userId`, likedMovies)
     } catch (error) {
       console.log(error)
     }
@@ -28,7 +29,7 @@ const MovieSwiping = () => {
   const updateDislikedMoviePreferences = async () => {
     setDislikedMovies([...dislikedMovies, movieId[movieOrderIndex]])
     try {
-      const res = await axios.put("http://localhost:4500/swipe/:userId", dislikedMovies)
+      const res = await axios.put(`${API_URL}/swipe/:userId`, dislikedMovies)
     } catch (error) {
       console.log(error)
     }
@@ -42,7 +43,7 @@ const MovieSwiping = () => {
   useEffect(() => {
     const pullMovies = async () => {
       try {
-        const { data } = await axios.get("http://localhost:4500/movies/")
+        const { data } = await axios.get(`${API_URL}/movies`)
         setAllMovies(data)
         let movieMappedId = data.map(movie=>movie._id)
         setMovieId(movieMappedId)
@@ -56,7 +57,7 @@ const MovieSwiping = () => {
   useEffect(() => {
     const getUserData = async () => {
       try {
-        const { data } = await axios.get(`http://localhost:4500/profile/${userId}`)
+        const { data } = await axios.get(`${API_URL}/profile/${userId}`)
         setUserData(data)
         setLikedMovies(data.moviesLiked)
         setDislikedMovies(data.moviesDisliked)
@@ -75,7 +76,7 @@ const MovieSwiping = () => {
         if (likedMovies.includes(movieId[movieOrderIndex]) || dislikedMovies.includes(movieId[movieOrderIndex])) {
           setMovieOrderIndex(movieOrderIndex+1)
         } else {
-          const { data } = await axios.get(`http://localhost:4500/movies/${movieId[movieOrderIndex]}`)
+          const { data } = await axios.get(`${API_URL}/movies/${movieId[movieOrderIndex]}`)
           console.log('data->', data)
 
           setMovieDisplayedToUser(data)
