@@ -21,7 +21,7 @@ function App() {
             <Route path="/movies/:movieId" element={<MovieInfo />} />
             <Route path="/login" element={<Login></Login>}></Route>
             <Route path="/register" element={<Register></Register>}></Route>
-            <Route path="/swipe/:userId" element={<MovieSwiping></MovieSwiping>}></Route>
+            <Route path="/swipe" element={<MovieSwiping></MovieSwiping>}></Route>
           </Routes>
         </BrowserRouter>
       </div>

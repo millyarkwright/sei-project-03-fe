@@ -3,64 +3,62 @@ import axios from "axios"
 import { useParams } from "react-router-dom"
 import { API_URL } from "../config.js"
 
-import { userIsAuthenticated } from "./helpers/auth"
+import { getUserName, userIsAuthenticated } from "./helpers/auth"
 
 const MovieSwiping = () => {
 
-  const { userId } = useParams()
-  const [movieOrderIndex, setMovieOrderIndex] = useState(0)
+  // const { userId } = useParams()
+  const username = getUserName()
+  const [count, setCount] = useState(0)
   const [userData, setUserData] = useState([])
   const [allMovies, setAllMovies] = useState('')
-  const [likedMovies, setLikedMovies] = useState([])
-  const [movieId, setMovieId] = useState([])
-  const [dislikedMovies, setDislikedMovies] = useState([])
+  // const [moviesLiked, setMoviesLiked] = useState([])
+  const [allMovieIds, setAllMovieIds] = useState([])
+  // const [moviesDisliked, setMoviesDisliked] = useState([])
   const [movieDisplayedToUser, setMovieDisplayedToUser] = useState('')
   const [errors, setErrors] = useState('')
+  const [userPreferences, setUserPreferences] = useState({
+    moviesLiked: [],
+    moviesDisliked: []
+  })
 
-  const updateLikedMoviePreferences = async () => {
-    setLikedMovies([...likedMovies, movieId[movieOrderIndex]])
-    try {
-      const res = await axios.put(`${API_URL}/swipe/:userId`, likedMovies)
-    } catch (error) {
-      console.log(error)
-    }
-  }
 
-  const updateDislikedMoviePreferences = async () => {
-    setDislikedMovies([...dislikedMovies, movieId[movieOrderIndex]])
-    try {
-      const res = await axios.put(`${API_URL}/swipe/:userId`, dislikedMovies)
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  // ! Handle Click 
 
   const handleButtonClick = (event) => {
-    (event.target.value === 'yes') ? updateLikedMoviePreferences() : updateDislikedMoviePreferences()
+    // (event.target.value === 'yes') ? updateMovieLikedPreferences() : updateMoviesDislikedPreferences()
+    
+    if (event.target.name === "moviesLiked") {
+        userPreferences.moviesLiked.push(allMovieIds[count])
+      console.log('userPreferences ->',userPreferences )
 
-    setMovieOrderIndex(movieOrderIndex + 1)
+    //   setUserPreferences(userPreferences.moviesLiked.push[count])
+    //  } else { 
+    //   setUserPreferences(userPreferences.moviesDisliked.push[count])
+    // }
+
+    
+
+    // const newPreferences = userPreferences.[event.target.name].push[movieId[count]]
+    // const newObj = { userPreferences.[event.target.name].push[movieId[count]] }
+    // console.log('newObj->',newObj)
+    // setUserPreferences(newObj)
+    setCount(count + 1)
+  } else 
+  { userPreferences.moviesDisliked.push(allMovieIds[count])
+    console.log('userPreferences ->',userPreferences )
+    setCount(count + 1)}
   }
-  useEffect(() => {
-    const pullMovies = async () => {
-      try {
-        const { data } = await axios.get(`${API_URL}/movies`)
-        setAllMovies(data)
-        let movieMappedId = data.map(movie=>movie._id)
-        setMovieId(movieMappedId)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    pullMovies()
-  },[])
+
+  // console.log('userpref->',userPreferences)
 
   useEffect(() => {
     const getUserData = async () => {
       try {
-        const { data } = await axios.get(`${API_URL}/profile/${userId}`)
+        const { data } = await axios.get(`${API_URL}/profile`)
         setUserData(data)
-        setLikedMovies(data.moviesLiked)
-        setDislikedMovies(data.moviesDisliked)
+        // setUserPreferences(data.moviesLiked)
+        // setUserPreferences(data.moviesDisliked)
       } catch (error) {
         console.log(error)
       }
@@ -68,15 +66,69 @@ const MovieSwiping = () => {
     getUserData()
   }, [])
 
+  useEffect(() => {
+    const updateDb = async () => {
+      try {
+        const { data } = await axios.post(`${API_URL}/`, userPreferences)
+        console.log('DATA ->', data)
+      } catch (error) {
+        // console.log(error)
+        setErrors(error)
+      }
+    }
+  },[userPreferences])
 
+  // ! Get all movie data & movie Ids
+  useEffect(() => {
+    const pullMovies = async () => {
+      try {
+        const { data } = await axios.get(`${API_URL}/movies`)
+        // console.log('moviedata->', data)
+        setAllMovies(data)
+        const movieMappedId = data.map(movie=>movie._id)
+        setAllMovieIds(movieMappedId)
+      } catch (error) {
+        console.log(error)
+        setErrors(error)
+      }
+    }
+    pullMovies()
+  },[])
+  
+  // console.log('movies', allMovies)
+  // console.log('allMovieIds', allMovieIds)
+
+
+  // useEffect(() => {
+  //   const pullMovieIds = async () => {
+  //     try {
+  //       const { data } = await axios.get(`${API_URL}/movies`)
+  //       console.log('moviedata[1]->', data[1])
+  //       setAllMovieIds(data._id)
+  //     } catch (error) {
+  //       console.log(error)
+  //       setErrors(error)
+  //     }
+  //   }
+  //   pullMovieIds()
+  // },[])
+
+  // console.log('allMovieIds', allMovieIds)
+
+
+
+  // ! Display Movie
   useEffect(()=>{
     const getDisplayMovieData = async () => {
       try {
-          // if movieOrderIndex === movieId.length then it will break, so we need at a catch for that to say no more movies, please wait for updates
-        if (likedMovies.includes(movieId[movieOrderIndex]) || dislikedMovies.includes(movieId[movieOrderIndex])) {
-          setMovieOrderIndex(movieOrderIndex+1)
+          // if count === movieId.length then it will break, so we need at a catch for that to say no more movies, please wait for updates
+          console.log('userPreferences',userPreferences)
+          console.log('typeof userPreferences.moviesLiked',typeof userPreferences.moviesLiked)
+          console.log('movieId',allMovieIds)
+        if (userPreferences.moviesLiked.includes(allMovieIds[count]) || userPreferences.moviesDisliked.includes(allMovieIds[count])) {
+          setCount(count+1)
         } else {
-          const { data } = await axios.get(`${API_URL}/movies/${movieId[movieOrderIndex]}`)
+          const { data } = await axios.get(`${API_URL}/movies/${allMovieIds[count]}`)
           console.log('data->', data)
 
           setMovieDisplayedToUser(data)
@@ -87,34 +139,58 @@ const MovieSwiping = () => {
       }
     }
     getDisplayMovieData()
-  }, [movieOrderIndex])
+  }, [count])
 
   return (
     <> 
       <h2>{movieDisplayedToUser.name}</h2>
-      {/* {userIsAuthenticated ? console.log("logged in") : console.log("logged out")} */}
+      {/* <div className='moviePicture'> <img src = { movieDisplayedToUser.image_url } alt="Movie Poster"></img> </div> */}
+      <p> { movieDisplayedToUser.year } </p>
+      <p> { movieDisplayedToUser.genre } </p>
+      {userIsAuthenticated ? console.log("logged in") : console.log("logged out")}
       <div>
         <p>movie div</p>
-        <p>moviesLiked { likedMovies }</p>
-        <p>moviesDisliked { dislikedMovies }</p>
+        <p>moviesLiked { userPreferences.moviesLiked }</p>
+        <p>moviesDisliked { userPreferences.moviesDisliked }</p>
 
       </div>
-      <button value="no" onClick={handleButtonClick} >❌</button>
-      <button value="yes" onClick={handleButtonClick} >✅</button>
+      <button name="moviesDisliked" value="no" onClick={handleButtonClick} >❌</button>
+      <button name="moviesLiked" value="yes" onClick={handleButtonClick} >✅</button>
     </>
   )
-}
+  }
 
 export default MovieSwiping
 
-  // console.log('movieId[movieOrderIndex]', movieId[movieOrderIndex])
-  // console.log('typeof movieId[movieOrderIndex]', typeof movieId[movieOrderIndex])
+  // console.log('movieId[count]', movieId[count])
+  // console.log('typeof movieId[count]', typeof movieId[count])
   // console.log('movieId', movieId)
-  // console.log('movieOrderIndex', movieOrderIndex)
+  // console.log('count', count)
   // console.log('likedMovies', likedMovies)
-  // console.log('dislikedMovies', dislikedMovies)
+  // console.log('moviesDisliked', moviesDisliked)
   // console.log('allMovies', allMovies)
   // console.log('typeof allMovies', typeof allMovies)
   // console.log('movieId', movieId)
 
-  // console.log(movieOrderIndex)
+  // console.log(count)
+
+
+
+    
+  // const updateMovieLikedPreferences = async () => {
+  //   setUserPreferences(userPreferences.moviesLiked = [...userPreferences.moviesLiked, movieId[count]])
+  //   try {
+  //     const res = await axios.put(`${API_URL}/profile/likes/${username}`, userPreferences)
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
+
+  // const updateMoviesDislikedPreferences = async () => {
+  //   setUserPreferences(userPreferences.moviesDisliked = [...userPreferences.moviesDisliked, movieId[count]])
+  //   try {
+  //     const res = await axios.put(`${API_URL}/profile/dislikes/${username}`, userPreferences)
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
