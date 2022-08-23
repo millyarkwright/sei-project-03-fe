@@ -3,7 +3,10 @@ import { useNavigate } from 'react-router-dom'
 
 import axios from 'axios'
 
-// import { apiRequest } from '../helpers/auth'
+// Import React Bootstrap 
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+
 
 const Register = () => {
   const navigate = useNavigate()
@@ -11,15 +14,17 @@ const Register = () => {
     email : '',
     username : '',
     password : '',
-    confirmedPassword : '',
+    confirmPassword : '',
     // moviesLiked : '',
   })
   const [error, setError ] = useState('')
+
   const handleChange = (event) => {
     const newObj = { ...formData, [event.target.name]: event.target.value }
     setFormData(newObj)
     setError('')
   }
+
   const handleSubmit = async (event) => {
     event.preventDefault()
     try {
@@ -32,7 +37,9 @@ const Register = () => {
     }
   }
   return (
-    <main>
+    <main className='formPage'>
+      <Container>
+        <Row>
         <form onSubmit={handleSubmit}>
           <h3>Register</h3>
           {/* Username */}
@@ -45,13 +52,15 @@ const Register = () => {
           <label htmlFor="password">Password</label>
           <input onChange={handleChange} type="password" name="password" placeholder='Password' value={formData.password} />
           {/* Password Confirmation */}
-          <label htmlFor="confirmedPassword">Confirm Password</label>
-          <input onChange={handleChange} type="password" name="confirmedPassword" placeholder='Confirm Password' value={formData.confirmedPassword} />
+          <label htmlFor="confirmPassword">Confirm Password</label>
+          <input onChange={handleChange} type="password" name="confirmPassword" placeholder='Confirm Password' value={formData.confirmedPassword} />
           {/* Error Message */}
           { error && <p>{error}</p>}
           {/* Submit */}
-          <input type="submit" value="Register" />
+          <input type="submit" value="Register" className='btn w-100'/>
         </form>
+        </Row>
+      </Container>
     </main>
   )
 }
