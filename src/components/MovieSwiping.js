@@ -16,18 +16,33 @@ const MovieSwiping = () => {
   const [movieDisplayedToUser, setMovieDisplayedToUser] = useState('')
   const [errors, setErrors] = useState('')
 
-  const handleButtonClick = (event) => {
-    (event.target.value === 'yes') ? setLikedMovies(...likedMovies, movieId[movieOrderIndex]) : setDislikedMovies(...dislikedMovies, movieId[movieOrderIndex])
-    //  above not working yet
-    setMovieOrderIndex(movieOrderIndex+1)
+  const updateLikedMoviePreferences = async () => {
+    setLikedMovies([...likedMovies, movieId[movieOrderIndex]])
+    try {
+      const res = await axios.put("http://localhost:4500/swipe/:userId", likedMovies)
+    } catch (error) {
+      console.log(error)
+    }
   }
-  console.log('movieId[movieOrderIndex]', movieId[movieOrderIndex])
-  console.log('movieOrderIndex', movieOrderIndex)
 
+  const updateDislikedMoviePreferences = async () => {
+    setDislikedMovies([...dislikedMovies, movieId[movieOrderIndex]])
+    try {
+      const res = await axios.put("http://localhost:4500/swipe/:userId", dislikedMovies)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const handleButtonClick = (event) => {
+    (event.target.value === 'yes') ? updateLikedMoviePreferences() : updateDislikedMoviePreferences()
+
+    setMovieOrderIndex(movieOrderIndex + 1)
+  }
   useEffect(() => {
     const pullMovies = async () => {
       try {
-        const { data } = await axios.get("http://localhost:4000/movies/")
+        const { data } = await axios.get("http://localhost:4500/movies/")
         setAllMovies(data)
         let movieMappedId = data.map(movie=>movie._id)
         setMovieId(movieMappedId)
@@ -39,10 +54,9 @@ const MovieSwiping = () => {
   },[])
 
   useEffect(() => {
-
     const getUserData = async () => {
       try {
-        const { data } = await axios.get(`http://localhost:4000/profile/${userId}`)
+        const { data } = await axios.get(`http://localhost:4500/profile/${userId}`)
         setUserData(data)
         setLikedMovies(data.moviesLiked)
         setDislikedMovies(data.moviesDisliked)
@@ -52,20 +66,20 @@ const MovieSwiping = () => {
     }
     getUserData()
   }, [])
-  // console.log('likedMovies', likedMovies)
-  // console.log('dislikedMovies', dislikedMovies)
-  // console.log('allMovies', allMovies)
-  // console.log('typeof allMovies', typeof allMovies)
-  // console.log('movieId', movieId)
 
-  // console.log(movieOrderIndex)
 
   useEffect(()=>{
     const getDisplayMovieData = async () => {
       try {
-        const { data } = await axios.get(`http://localhost:4000/movies/${movieId[movieOrderIndex]}`)
-        console.log('data->', data)
-        setMovieDisplayedToUser(data)
+
+        if (likedMovies.includes(movieId[movieOrderIndex]) || dislikedMovies.includes(movieId[movieOrderIndex])) {
+          setMovieOrderIndex(movieOrderIndex+1)
+        } else {
+          const { data } = await axios.get(`http://localhost:4500/movies/${movieId[movieOrderIndex]}`)
+          console.log('data->', data)
+
+          setMovieDisplayedToUser(data)
+        }   
       } catch (error) {
         console.log('error->',error)
         setErrors(error)
@@ -80,6 +94,8 @@ const MovieSwiping = () => {
       {/* {userIsAuthenticated ? console.log("logged in") : console.log("logged out")} */}
       <div>
         <p>movie div</p>
+        <p>moviesLiked { likedMovies }</p>
+        <p>moviesDisliked { dislikedMovies }</p>
 
       </div>
       <button value="no" onClick={handleButtonClick} >❌</button>
@@ -89,3 +105,15 @@ const MovieSwiping = () => {
 }
 
 export default MovieSwiping
+
+  // console.log('movieId[movieOrderIndex]', movieId[movieOrderIndex])
+  // console.log('typeof movieId[movieOrderIndex]', typeof movieId[movieOrderIndex])
+  // console.log('movieId', movieId)
+  // console.log('movieOrderIndex', movieOrderIndex)
+  // console.log('likedMovies', likedMovies)
+  // console.log('dislikedMovies', dislikedMovies)
+  // console.log('allMovies', allMovies)
+  // console.log('typeof allMovies', typeof allMovies)
+  // console.log('movieId', movieId)
+
+  // console.log(movieOrderIndex)
