@@ -17,7 +17,7 @@ const MovieInfo = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const { data } = await axios.get(`http://localhost:4000/movies/${movieId}`)
+        const { data } = await axios.get(`http://localhost:4500/movies/${movieId}`)
         console.log('data->', data)
         setMovie(data)
       } catch (error) {
