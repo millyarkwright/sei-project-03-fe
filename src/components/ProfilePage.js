@@ -6,6 +6,14 @@ const ProfilePage = () => {
 
   const [userInfo, setUserInfo] = useState([])
 
+  const [userPasswords, setUserPasswords] = useState({
+    currentPassword: "", 
+    newPassword: "", 
+    newPasswordConfirm: ""
+  })
+
+  const [formError, setFormError] = useState("")
+
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
@@ -18,6 +26,19 @@ const ProfilePage = () => {
     }
     fetchUserInfo()
   }, [])
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault()
+    try {
+      
+    } catch (error) {
+      console.log("pw change error", error)
+    }
+  }
+
+  const handleChange = () => {
+    
+  }
   
   return (
     <>
@@ -35,7 +56,7 @@ const ProfilePage = () => {
         </div>
       </div>
       <div className="change-password">
-        <form action="">
+        <form onSubmit={handleFormSubmit}>
           <h3>Change Password</h3>
           <div className="change-password-text">
             <p>Enter current password</p>
@@ -43,15 +64,13 @@ const ProfilePage = () => {
             <p>Confirm new password</p>
           </div>
           <div className="change-password-fields">
-            <input type="password" name="" id="" />
-            <input type="password" name="" id="" />
-            <input type="password" name="" id="" />
+            <input type="password" name="currentPassword" placeholder="Your current password" onChange={handleChange} />
+            <input type="password" name="newPassword" placeholder="Your new password" onChange={handleChange} />
+            <input type="password" name="newPasswordConfirm" placeholder="Confirm new password" onChange={handleChange} />
           </div>
+          <input type="submit" value="Change Password" />
         </form>
-
       </div>
-
-
     </>
   )
 }
