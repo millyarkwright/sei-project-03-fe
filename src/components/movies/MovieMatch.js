@@ -1,27 +1,39 @@
 // import {useState, useEffect} from 'react'
 // const Match = () => {
 
-//   const [error, setError] = useState('')
+//   // const [error, setError] = useState('')
+
 //   const [watchWith, setWatchWith] = useState( { username: '' })
 
-//   const handleButtonClick = (event) => {
-//     console.log(event)
-//   }
+//   // const handleButtonClick = (event) => {
+//   //   console.log(event)
+//   // }
   
-//   const handleFieldChange = (event) => {
-//     console.log(event.target.value)
-//   }
+//   // const handleFieldChange = (event) => {
+//   //   console.log(event.target.value)
+//   // }
+
+//   // const handleSubmit = (event) => {
+//   //   event.preventDefault()
+//   //   console.log(event)
+//   // }
 
 //   // ! JSX
 
 // return (
 //   <>
 //     <h1> landed at Match </h1>
-//     <form onSubmit={handleSubmit}>
-//           <input type="text" name="username" placeholder="Add A Friend's User Name" onChange={handleFieldChange}/>
-//           <input type="submit" value="watchWith"/>
-//           {isError && errorMessage}
-//         </form>
+//     <div className='dynamicForm'>
+//       <form onSubmit={handleSubmit}>
+//         {watchWith.map((input, count) => {
+//           return(
+//             <div key={count}>
+//               <input name='username' placeholder ='User Name'/>
+//             </div>
+//           )
+//         })}
+//       </form>
+//     </div>
 //     <button name="addMatch" onClick={handleButtonClick} >Match With A Friend</button>
 //   </>
 // )
