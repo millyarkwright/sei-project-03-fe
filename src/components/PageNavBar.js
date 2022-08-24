@@ -29,7 +29,7 @@ const handleLogout = () => {
           <>
             <Nav.Link as={Link} to='/swipe'>Movie Swipe</Nav.Link>
             <Nav.Link as={Link} to='/moviematch'>Movie Match</Nav.Link>
-            <Nav.Link as={Link} to='/'>Profile</Nav.Link>
+            <Nav.Link as={Link} to='/profile'>Profile</Nav.Link>
             <span onClick={handleLogout}>Logout</span>
           </>
           :
