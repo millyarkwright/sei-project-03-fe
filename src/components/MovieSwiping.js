@@ -17,14 +17,24 @@ const MovieSwiping = () => {
     const pullMovies = async () => {
       try {
         const { data } = await axios.get(`${API_URL}/movies`)
-        setAllMovies(data)
+        
+        const filteredData = data.filter(movie => {
+          const movieAlreadyLiked = userData.moviesLiked.map(likedMovie => likedMovie).includes(movie._id)
+          const movieAlreadyDisliked = userData.moviesDisliked.map(dislikedMovie => dislikedMovie).includes(movie._id)
+
+          return !(movieAlreadyLiked || movieAlreadyDisliked)
+        })
+        console.log("USer liked", userData.moviesLiked)
+        console.log('filtereddata->', filteredData)
+        console.log('movies liked array', userData.moviesLiked)
+        setAllMovies(filteredData)
       } catch (error) {
         setErrors(error)
       }
     }
     pullMovies()
-  },[])
-
+  },[userData])
+  console.log('allmovies->',allMovies)
 
   // ! Get User Data
 
@@ -44,6 +54,9 @@ const MovieSwiping = () => {
   // ! test for if its shown the film already
 // check user data for liked and disliked
 //  check if liked and disliked movies are in allMovies._id
+// if allMovies[count]._id === user.moviesliked || user.moviesDisliked
+// setCount(count + 1)
+// else 
   
   // ! Handle Button Click & Updated DB
 
@@ -73,35 +86,36 @@ const MovieSwiping = () => {
       setCount(count + 1)
     }
   
-  
-
   return (
-    <>
+    <main>
     { allMovies ?
         <> 
-          <h2>{allMovies[count].name}</h2>
-          {/* <div className='moviePicture'> <img src = { allMovies[count].image_url } alt="Movie Poster"></img> </div> */}
-          {/* <p> { allMovies[count].year } </p>
-          <p> { allMovies[count].genre } </p> */}
-          {/* {userIsAuthenticated ? console.log("logged in") : console.log("logged out")} */}
-          <div>
-            <Link to={`/movies/${allMovies[count]._id}`}>  
-              <p>movie div</p>
-            </Link>
-          
-            {/* <p>moviesLiked { userPreferences.moviesLiked }</p>
-            <p>moviesDisliked { userPreferences.moviesDisliked }</p> */}
-
+          <div className='movieSwipe-wrapper'>
+            <h2>{allMovies[count].name}</h2>
+            <p> {allMovies[count].year}</p>
+            <div className="preference-container">
+              <div className="preferenceButtons">
+                <button name="dislikes" value="no" onClick={handleButtonClick} >❌</button>
+              </div>
+              <div className='movieImage'> 
+                <img src={allMovies[count].image_url} alt="Movie Poster"></img> 
+              </div>
+              <div className="preferenceButtons">
+                <button name="likes" value="yes" onClick={handleButtonClick} >✅</button>
+              </div>
+            </div>
+            <div>
+              <Link to={`/movies/${allMovies[count]._id}`}>  
+                <div>Movie Details</div>
+              </Link>
+            </div>
           </div>
-          <button name="dislikes" value="no" onClick={handleButtonClick} >❌</button>
-          <button name="likes" value="yes" onClick={handleButtonClick} >✅</button>
         </>
       :
       <h2> 'loading' </h2>
     }
-  </>
+  </main>
   )
-  
 }
 
 export default MovieSwiping
