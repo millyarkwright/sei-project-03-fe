@@ -23,7 +23,7 @@ function App() {
             <Route path="/login" element={<Login></Login>}></Route>
             <Route path="/register" element={<Register></Register>}></Route>
             <Route path="/swipe" element={<MovieSwiping></MovieSwiping>}></Route>
-            <Route path="/match" element={<Match></Match>}></Route>
+            {/* <Route path="/match" element={<Match></Match>}></Route> */}
           </Routes>
         </BrowserRouter>
       </div>
