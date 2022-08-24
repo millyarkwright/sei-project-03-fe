@@ -8,6 +8,7 @@ const MovieSwiping = () => {
 
   const [count, setCount] = useState(0)
   const [userData, setUserData] = useState([])
+  const [moviesRemaining, setMoviesRemaining] = useState()
   const [allMovies, setAllMovies] = useState('')
   const [errors, setErrors] = useState('')
  
@@ -17,16 +18,14 @@ const MovieSwiping = () => {
     const pullMovies = async () => {
       try {
         const { data } = await axios.get(`${API_URL}/movies`)
-        
         const filteredData = data.filter(movie => {
           const movieAlreadyLiked = userData.moviesLiked.map(likedMovie => likedMovie).includes(movie._id)
           const movieAlreadyDisliked = userData.moviesDisliked.map(dislikedMovie => dislikedMovie).includes(movie._id)
-
           return !(movieAlreadyLiked || movieAlreadyDisliked)
         })
-        console.log("USer liked", userData.moviesLiked)
-        console.log('filtereddata->', filteredData)
-        console.log('movies liked array', userData.moviesLiked)
+        // console.log("USer liked", userData.moviesLiked)
+        // console.log('filtereddata->', filteredData)
+        // console.log('movies liked array', userData.moviesLiked)
         setAllMovies(filteredData)
       } catch (error) {
         setErrors(error)
@@ -35,6 +34,12 @@ const MovieSwiping = () => {
     pullMovies()
   },[userData])
   console.log('allmovies->',allMovies)
+
+  // If user has been through all movies
+  useEffect(() => {
+    const moviesRemaining = allMovies.length
+    setMoviesRemaining(moviesRemaining)
+  },[allMovies])
 
   // ! Get User Data
 
@@ -51,13 +56,6 @@ const MovieSwiping = () => {
     getUserData()
   }, [])
 
-  // ! test for if its shown the film already
-// check user data for liked and disliked
-//  check if liked and disliked movies are in allMovies._id
-// if allMovies[count]._id === user.moviesliked || user.moviesDisliked
-// setCount(count + 1)
-// else 
-  
   // ! Handle Button Click & Updated DB
 
   const handleButtonClick = (event) => {
@@ -89,6 +87,9 @@ const MovieSwiping = () => {
   return (
     <main>
     { allMovies ?
+        moviesRemaining === 0 ? 
+          <h2>You've been through all the movies! Please wait for an update.</h2> 
+        :
         <> 
           <div className='movieSwipe-wrapper'>
             <h2>{allMovies[count].name}</h2>
@@ -112,7 +113,9 @@ const MovieSwiping = () => {
           </div>
         </>
       :
-      <h2> 'loading' </h2>
+      <>
+        {<h2>Loading</h2>}
+      </>
     }
   </main>
   )
