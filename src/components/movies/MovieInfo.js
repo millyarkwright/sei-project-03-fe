@@ -30,6 +30,7 @@ const MovieInfo = () => {
 
   return (
     <main>
+      <section className="movieInfo-wrapper">
       {movie ?
         <>
         <header className="movieInfo">
@@ -39,8 +40,7 @@ const MovieInfo = () => {
             <p>⭐️ {movie.rating}/10</p>
           </div>
         </header>
-
-        <div className="movieInfo-wrapper">
+        <div className="movieInfo-container">
           <div className="movieImage">
             <img src={movie.image_url} alt="Movie Poster"></img>
           </div>
@@ -73,16 +73,73 @@ const MovieInfo = () => {
           </div>
         </div>
         </>
-      :
-      <h2>
-        {errors ? 'Something went wrong. Please try again later.' : 'Loading...'}
-      </h2>
-      }
+        :
+        <h2>
+          {errors ? 'Something went wrong. Please try again later.' : 'Loading...'}
+        </h2>
+        }
+      </section>
     </main>
   )
 }
 
 export default MovieInfo
+
+
+
+
+{/* <Row className="movie-container p-3 py-5 mx-2 bg-gradient justify-content-center">
+<h1 className="text-center fw-bold">{movie.name}</h1>
+<div className="imdbRating">
+  <p>IMDb RATING</p>
+   <p>⭐️ {movie.rating}/10</p>
+</div>
+{ movie ?
+  <Row>
+    <Col className="movieImage text-center text-lg-start col-5" xs="12" lg="4" xl="4"  >
+      <img className="bg-gradient" src={movie.image_url} alt="Movie Poster" />
+    </Col>
+    <Col className="movie-details mt-3 mt-lg-0 bg-gradient" xs="12" lg="8" xl="8" pl-lg="0">
+      <Row>
+        <Col xs="12">
+          <h3 className='fw-semibold'>{movie.desc}</h3>
+        </Col>
+      </Row>
+      <Row>
+        <Col xs="6">
+          <h3 className='fw-semibold'>Stars</h3>
+        </Col>
+        <Col xs="6">
+          {movie.actors.map(actor => {
+            return (
+            <Col>
+              <p className="actors" key={actor}>{actor}</p>
+            </Col>
+          )
+        </Col>
+      </Row>
+      <Row>
+        <Col xs="6">
+          <h3 className='fw-semibold'>Directors</h3>
+        </Col>
+        <Col xs="6">
+          <h3>Director Names</h3>
+        </Col>
+      </Row>
+    </Col>
+  </Row>
+:
+<h2 className="text-center">
+  {errors ? 'Something went wrong. Please try again later.' : 'Loading'}
+</h2>
+}
+</Row> */}
+
+
+
+
+
+
 
 {/* <>
 <h1>{movie.name}</h1>
