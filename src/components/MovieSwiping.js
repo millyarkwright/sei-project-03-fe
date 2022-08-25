@@ -7,6 +7,9 @@ import { getUserName } from "./helpers/auth"
 // Import React Bootstrap Components 
 import Container from 'react-bootstrap/Container'
 
+// Import Helpers
+import NeedToLogIn from './helpers/redirect.js'
+
 const MovieSwiping = () => {
 
   const [count, setCount] = useState(0)
@@ -89,7 +92,10 @@ const MovieSwiping = () => {
   
   return (
     <Container>
-    { allMovies ?
+    {  errors ? 
+        <NeedToLogIn/>
+      :
+      allMovies ?
         moviesRemaining === 0 ? 
           <h2>You've been through all the movies! Please wait for an update.</h2> 
         :
