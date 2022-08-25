@@ -10,6 +10,7 @@ import Container from 'react-bootstrap/Container'
 
 // Import Helpers
 import NeedToLogIn from '../helpers/redirect.js'
+import {UnauthorisedMessage} from '../helpers/auth.js'
 
 
 const MovieInfo = () => {
@@ -35,7 +36,8 @@ const MovieInfo = () => {
   return (
       <Container className="movieInfo-wrapper">
       { errors ?
-        <NeedToLogIn/>
+        <UnauthorisedMessage/>
+        // <NeedToLogIn/>
         :
         movie ?
           <>

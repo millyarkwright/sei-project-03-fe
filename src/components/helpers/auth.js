@@ -44,11 +44,7 @@ export const userIsAuthenticated = () => {
   return currentTime < payload.exp
 }
 
-// // unauthorised to view pages
-// export const NeedToLogIn = () => {
-//   const navigate = useNavigate()
-//   useEffect(() => {
-//     navigate('/login')
-//   },[])
-//   return <h1>Redirecting to login page</h1>
-// }
+// unauthorised to view pages
+export const UnauthorisedMessage = () => {
+  return <h1>You are not authorised to view this page. Please login or create an account.</h1>
+}

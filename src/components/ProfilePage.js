@@ -4,7 +4,8 @@ import { API_URL } from "../config.js"
 import { useNavigate } from 'react-router-dom'
 
 // Import Helpers
-import NeedToLogIn from './helpers/redirect.js'
+// import NeedToLogIn from './helpers/redirect.js'
+import { UnauthorisedMessage } from "./helpers/auth.js"
 
 const ProfilePage = () => {
 
@@ -51,7 +52,8 @@ const ProfilePage = () => {
   return (
     <>
       {formError ? 
-        <NeedToLogIn/>
+        <UnauthorisedMessage/>
+        // <NeedToLogIn/>
       :
       <>
       <div className="user-info-div">
