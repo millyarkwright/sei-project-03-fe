@@ -27,7 +27,7 @@ const MovieSwiping = () => {
 
           return !(movieAlreadyLiked || movieAlreadyDisliked)
         })
-        console.log("USer liked", userData.moviesLiked)
+        console.log("User liked", userData.moviesLiked)
         console.log('filtereddata->', filteredData)
         console.log('movies liked array', userData.moviesLiked)
         setAllMovies(filteredData)
