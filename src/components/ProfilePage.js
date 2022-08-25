@@ -7,8 +7,7 @@ import { userIsAuthenticated } from './helpers/auth'
 const ProfilePage = () => {
 
   const navigate = useNavigate()
-
-
+  
   const [userInfo, setUserInfo] = useState([])
   const [userPasswords, setUserPasswords] = useState({
     currentPassword: "",
