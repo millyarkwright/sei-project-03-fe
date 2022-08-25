@@ -7,9 +7,9 @@ const ProfilePage = () => {
   const [userInfo, setUserInfo] = useState([])
 
   const [userPasswords, setUserPasswords] = useState({
-    currentPassword: "", 
+    password: "", 
     newPassword: "", 
-    newPasswordConfirm: ""
+    newConfirmPassword: ""
   })
 
   const [formError, setFormError] = useState("")
@@ -30,7 +30,7 @@ const ProfilePage = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault()
     try {
-      const { data } = await axios.put(`${API_URL}/register/`, formData)
+      const { data } = await axios.put(`${API_URL}/register/`, userPasswords)
     } catch (error) {
       console.log("pw change error", error)
     }
