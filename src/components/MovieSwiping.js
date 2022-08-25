@@ -18,7 +18,7 @@ const MovieSwiping = () => {
   const [userData, setUserData] = useState([])
   const [moviesRemaining, setMoviesRemaining] = useState()
   const [allMovies, setAllMovies] = useState('')
-  const [errors, setErrors] = useState('')
+  const [error, setError] = useState('')
   const [errorStatus, setErrorStatus] = useState()
  
 
@@ -37,7 +37,7 @@ const MovieSwiping = () => {
         // console.log('movies liked array', userData.moviesLiked)
         setAllMovies(filteredData)
       } catch (error) {
-        setErrors(error)
+        setError(error)
       }
     }
     pullMovies()
@@ -60,7 +60,7 @@ const MovieSwiping = () => {
         setUserData(data)
       } catch (error) {
         console.log('error',error.response.status)
-        setErrors(error)
+        setError(error)
         setErrorStatus(error.response.status)
       }
     }
@@ -77,7 +77,7 @@ const MovieSwiping = () => {
           const { data } = await axios.put(`${API_URL}/preferences/likes/${allMovies[count]._id}`)
           console.log('updatedb - DATA ->', data)
         } catch (error) {
-          setErrors(error)
+          setError(error)
           setErrorStatus(error.response.status)
         }
       }
@@ -88,7 +88,7 @@ const MovieSwiping = () => {
             const { data } = await axios.put(`${API_URL}/preferences/dislikes/${allMovies[count]._id}`)
             console.log('updatedb - DATA ->', data)
           } catch (error) {
-            setErrors(error)
+            setError(error)
             setErrorStatus(error.response.status)
           }
         }

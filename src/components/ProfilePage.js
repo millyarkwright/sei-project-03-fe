@@ -4,8 +4,8 @@ import { API_URL } from "../config.js"
 import { useNavigate } from 'react-router-dom'
 
 // Import Helpers
-// import NeedToLogIn from './helpers/redirect.js'
-import { UnauthorisedMessage } from "./helpers/auth.js"
+import NeedToLogIn from './helpers/redirect.js'
+// import { UnauthorisedMessage } from "./helpers/auth.js"
 
 const ProfilePage = () => {
 
@@ -18,7 +18,9 @@ const ProfilePage = () => {
     newPasswordConfirm: ""
   })
 
-  const [formError, setFormError] = useState()
+  const [error, setError] = useState()
+  const [errorStatus, setErrorStatus] = useState()
+
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -28,7 +30,8 @@ const ProfilePage = () => {
         setUserInfo(data)
       } catch (error) {
         console.log(error)
-        setFormError(error)
+        setError(error)
+        setErrorStatus(error.response.status)
       }
     }
     fetchUserInfo()
@@ -39,7 +42,8 @@ const ProfilePage = () => {
     try {
       const { data } = await axios.put(`${API_URL}/register`, userPasswords)
     } catch (error) {
-      setFormError(error)
+      setError(error)
+      setErrorStatus(error.response.status)
       console.log("pw change error", error)
     }
   }
@@ -51,9 +55,9 @@ const ProfilePage = () => {
 
   return (
     <>
-      {formError ? 
-        <UnauthorisedMessage/>
-        // <NeedToLogIn/>
+      { errorStatus === 401 ? 
+        // <UnauthorisedMessage/>
+        <NeedToLogIn/>
       :
       <>
       <div className="user-info-div">
