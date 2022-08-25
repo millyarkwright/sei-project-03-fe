@@ -1,7 +1,15 @@
-.movieInfo, header {
+.movieInfo-wrapper {
+  margin: 5px 100px;
+  border: 1px solid black;
+  background-color: $bgdark;
+  box-shadow: $box-shadow;
+}
+
+header {
   display: flex;
-  justify-content: space-between;
-  padding: 15px;
+  justify-content: space-evenly;
+  padding: 15px 50px;
+  color: $headercolor;
   h1 {
     padding-left: 20px;
   }
@@ -17,44 +25,53 @@
   }
 }
 
-.movieInfo-wrapper  {
-  margin-top: 50px;
-  margin-bottom: 30px;
+.movieInfo-container  {
+  margin: 0px 50px 50px 50px;
   display: flex;
-  justify-content: center;
+  align-items: center;
 }
 
 .movieImage {
-  padding-left: 0px;
-  height: 100%;
-  max-width: 50%;
+  padding: 5px;
   img {
     border-radius: 5px;
-    height: 100%;
-    max-width: 50%;
+    max-width: 100%;
   }
 } 
 
 .movieDetails {
+  padding: 5px;
+  color: $paracolor;
+  div {
+    display: flex;
+    align-items: center;
+    p {
+      margin-bottom: 8px;
+    }
+  }
+  .genre-container  {
+    justify-content: center;
+    .genre {
+      margin: 5px 15px;
+      padding: 5px 10px;
+      border-radius: 10px;
+      background-color: $bglight;
+      color: $black;
+    }
+  }
   .actors-container {
-    display: flex;
-    align-items: center;
+    justify-content: center;
   }
-  .directors-container {
-    display: flex;
-    align-items: center;
-  }
-}
-
-.genre-container  {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  .genre {
-    margin: 5px 15px;
-    padding: 5px 10px;
+  .imdbLink {
+    background: $bglight;
+    border: 1px solid $bglight;
+    box-shadow: $box-shadow;
     border-radius: 10px;
-    background-color: red;
-
-  }
+    padding: 5px 10px;
+      a {
+        text-decoration: none;
+        color: $black;
+      }
+    }
 }
+

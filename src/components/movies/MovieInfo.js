@@ -29,7 +29,7 @@ const MovieInfo = () => {
   }, [movieId])
 
   return (
-    <main>
+      <Container className="movieInfo-wrapper">
       {movie ?
         <>
         <header className="movieInfo">
@@ -39,12 +39,11 @@ const MovieInfo = () => {
             <p>⭐️ {movie.rating}/10</p>
           </div>
         </header>
-
-        <div className="movieInfo-wrapper">
-          <div className="movieImage">
+        <Row className="movieInfo-container">
+          <Col className="movieImage" md="4">
             <img src={movie.image_url} alt="Movie Poster"></img>
-          </div>
-          <div className="movieDetails">
+          </Col>
+          <Col className="movieDetails" md="8">
             <div className="genre-container">
               {movie.genre.map(genre => {
               return (
@@ -52,14 +51,16 @@ const MovieInfo = () => {
               )
               })}
             </div>
-            <h3>{movie.desc}</h3>
-            <div className="actors-container">
+            <p className="lead">{movie.desc}</p>
+            <div>
               <h4>Stars</h4>
-              {movie.actors.map(actor => {
-              return (
-                <p className="actors" key={actor}>{actor}</p>
-              )
-              })}
+              <div className="actors-container">
+                {movie.actors.map(actor => {
+                return (
+                  <p className="actors" key={actor}>{actor}</p>
+                )
+                })}
+              </div>
             </div>
             <div className="directors-container">
               <h4>Director(s)</h4>
@@ -70,19 +71,75 @@ const MovieInfo = () => {
               })}
             </div>
             <button className="imdbLink"><a href={`https://www.imdb.com${movie.imdb_url}`}target="_blank" rel="noreferrer">Take me to IMDb</a></button>
-          </div>
-        </div>
+          </Col>
+        </Row>
         </>
-      :
-      <h2>
-        {errors ? 'Something went wrong. Please try again later.' : 'Loading...'}
-      </h2>
-      }
-    </main>
+        :
+        <h2>
+          {errors ? 'Something went wrong. Please try again later.' : 'Loading...'}
+        </h2>
+        }
+      </Container>
   )
 }
 
 export default MovieInfo
+
+
+
+
+{/* <Row className="movie-container p-3 py-5 mx-2 bg-gradient justify-content-center">
+<h1 className="text-center fw-bold">{movie.name}</h1>
+<div className="imdbRating">
+  <p>IMDb RATING</p>
+   <p>⭐️ {movie.rating}/10</p>
+</div>
+{ movie ?
+  <Row>
+    <Col className="movieImage text-center text-lg-start col-5" xs="12" lg="4" xl="4"  >
+      <img className="bg-gradient" src={movie.image_url} alt="Movie Poster" />
+    </Col>
+    <Col className="movie-details mt-3 mt-lg-0 bg-gradient" xs="12" lg="8" xl="8" pl-lg="0">
+      <Row>
+        <Col xs="12">
+          <h3 className='fw-semibold'>{movie.desc}</h3>
+        </Col>
+      </Row>
+      <Row>
+        <Col xs="6">
+          <h3 className='fw-semibold'>Stars</h3>
+        </Col>
+        <Col xs="6">
+          {movie.actors.map(actor => {
+            return (
+            <Col>
+              <p className="actors" key={actor}>{actor}</p>
+            </Col>
+          )
+        </Col>
+      </Row>
+      <Row>
+        <Col xs="6">
+          <h3 className='fw-semibold'>Directors</h3>
+        </Col>
+        <Col xs="6">
+          <h3>Director Names</h3>
+        </Col>
+      </Row>
+    </Col>
+  </Row>
+:
+<h2 className="text-center">
+  {errors ? 'Something went wrong. Please try again later.' : 'Loading'}
+</h2>
+}
+</Row> */}
+
+
+
+
+
+
 
 {/* <>
 <h1>{movie.name}</h1>
