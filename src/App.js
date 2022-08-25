@@ -14,6 +14,7 @@ import MovieInfo from './components/movies/MovieInfo'
 import MovieSwiping from './components/MovieSwiping'
 import Match from './components/movies/MovieMatch'
 import ProfilePage from './components/ProfilePage'
+import NotFoundPage from './components/NotFoundPage'
 
 
 
