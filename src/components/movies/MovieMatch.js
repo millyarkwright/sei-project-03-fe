@@ -94,7 +94,7 @@ const Match = () => {
     } else {
     navigate(`/movies/${filteredMovies[Math.floor(Math.random() * filteredMovies.length)]}`)}
     } else {
-      setError({ message: 'Please enter a valid username.'})
+      setError({ message: 'Please enter a valid username'})
     }
   }
 

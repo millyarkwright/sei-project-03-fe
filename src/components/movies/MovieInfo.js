@@ -36,7 +36,7 @@ const MovieInfo = () => {
               {/* <div className="back-button">
                 
               </div> */}
-          <Col className="movieImage" md="4">
+          <Col className="movieImage">
             <Link to={`/swipe`}>  
               <img src={movie.image_url} alt="Movie Poster"></img>
             </Link>
@@ -51,6 +51,10 @@ const MovieInfo = () => {
                 <div className="genre" key={genre}>{genre}</div>
               )
               })}
+              <div className="imdbRating">
+                    <p>IMDB RATING</p>
+                    <p>⭐️ {movie.rating}/10</p>
+                  </div>
             </div>
             <p className="lead">{movie.desc}</p>
             <div className ="actors-and-directors-container">
@@ -76,10 +80,6 @@ const MovieInfo = () => {
                   <button className="back-button">Back To Swipe</button>
                 </Link>
                   <button className="imdbLink"><a href={`https://www.imdb.com${movie.imdb_url}`}target="_blank" rel="noreferrer">Take me to IMDB</a></button>
-                  <div className="imdbRating">
-                    <p>IMDB RATING</p>
-                    <p>⭐️ {movie.rating}/10</p>
-                  </div>
               </div>
           </Col>
         </Row>

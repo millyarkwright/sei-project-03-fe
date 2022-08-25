@@ -90,8 +90,11 @@ p#year {
 
 h2#movies-name {
   font-size: 50px;
+  text-align:center;
 }
-
+.min-display-button{
+  display:none;
+}
 @media (max-width: 380px) {
   .preference-container {
     .preferenceButtons {
@@ -118,4 +121,9 @@ h2#movies-name {
     margin: 0 auto;
     text-align: center;
 }
+
+.min-display-button{
+  display:unset;
+  text-align:center
+  }
 }

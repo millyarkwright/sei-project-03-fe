@@ -99,17 +99,24 @@ const MovieSwiping = () => {
               <h2 id="movies-name">{allMovies[count].name}</h2>
             </div>
             {/* <p id="year">{allMovies[count].year}</p> */}
-            <div className="preference-container">
-              <div className="preferenceButtons">
-                <button name="dislikes" value="no" id="no" onClick={handleButtonClick} >✕</button>
+            <div className="min-display-container">
+              <div className="preference-container">
+                <div className="preferenceButtons">
+                  <button name="dislikes" value="no" id="no" onClick={handleButtonClick} >✕</button>
+                </div>
+                <div className='movieImage'> 
+                  <Link to={`/movies/${allMovies[count]._id}`}>  
+                    <img src={allMovies[count].image_url} alt="Movie Poster"></img> 
+                  </Link>
+                </div>
+                <div className="preferenceButtons">
+                  <button name="likes" value="yes" id="yes" onClick={handleButtonClick} >✔</button>
+                </div>
               </div>
-              <div className='movieImage'> 
+              <div className="min-display-button">
                 <Link to={`/movies/${allMovies[count]._id}`}>  
-                  <img src={allMovies[count].image_url} alt="Movie Poster"></img> 
+                  <h2> click for more information</h2>
                 </Link>
-              </div>
-              <div className="preferenceButtons">
-                <button name="likes" value="yes" id="yes" onClick={handleButtonClick} >✔</button>
               </div>
             </div>
           </div>
