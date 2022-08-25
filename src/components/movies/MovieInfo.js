@@ -8,16 +8,12 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 
-// Import Helpers
-import NeedToLogIn from '../helpers/redirect.js'
-import {UnauthorisedMessage} from '../helpers/auth.js'
-
-
 const MovieInfo = () => {
 
   const { movieId } = useParams()
   const [movie, setMovie] = useState()
-  const [errors, setErrors] = useState('')
+  const [error, setError] = useState('')
+
 
   useEffect(() => {
     const getData = async () => {
@@ -27,7 +23,7 @@ const MovieInfo = () => {
         setMovie(data)
       } catch (error) {
         console.log('error->',error)
-        setErrors(error)
+        setError(error)
       }
     }
     getData()
@@ -35,11 +31,7 @@ const MovieInfo = () => {
 
   return (
       <Container className="movieInfo-wrapper">
-      { errors ?
-        <UnauthorisedMessage/>
-        // <NeedToLogIn/>
-        :
-        movie ?
+      { movie ?
           <>
           <header className="movieInfo">
             <h1>{movie.name}</h1>
@@ -85,7 +77,7 @@ const MovieInfo = () => {
           </>
           :
           <h2>
-            {errors ? 'Something went wrong. Please try again later.' : 'Loading...'}
+            {error ? 'Something went wrong. Please try again later.' : 'Loading...'}
           </h2>
       }
       </Container>

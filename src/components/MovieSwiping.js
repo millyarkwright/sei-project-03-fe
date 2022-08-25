@@ -8,8 +8,8 @@ import { getUserName } from "./helpers/auth"
 import Container from 'react-bootstrap/Container'
 
 // Import Helpers
-// import NeedToLogIn from './helpers/redirect.js'
-import { UnauthorisedMessage } from "./helpers/auth.js"
+import NeedToLogIn from './helpers/redirect.js'
+// import { UnauthorisedMessage } from "./helpers/auth.js"
 
 
 const MovieSwiping = () => {
@@ -18,7 +18,8 @@ const MovieSwiping = () => {
   const [userData, setUserData] = useState([])
   const [moviesRemaining, setMoviesRemaining] = useState()
   const [allMovies, setAllMovies] = useState('')
-  const [errors, setErrors] = useState('')
+  const [error, setError] = useState('')
+  const [errorStatus, setErrorStatus] = useState()
  
 
   // ! Get all movie data & movie Ids
@@ -36,7 +37,7 @@ const MovieSwiping = () => {
         // console.log('movies liked array', userData.moviesLiked)
         setAllMovies(filteredData)
       } catch (error) {
-        setErrors(error)
+        setError(error)
       }
     }
     pullMovies()
@@ -58,7 +59,9 @@ const MovieSwiping = () => {
         console.log('userdata', data)
         setUserData(data)
       } catch (error) {
-        console.log(error)
+        console.log('error',error.response.status)
+        setError(error)
+        setErrorStatus(error.response.status)
       }
     }
     getUserData()
@@ -74,7 +77,8 @@ const MovieSwiping = () => {
           const { data } = await axios.put(`${API_URL}/preferences/likes/${allMovies[count]._id}`)
           console.log('updatedb - DATA ->', data)
         } catch (error) {
-          setErrors(error)
+          setError(error)
+          setErrorStatus(error.response.status)
         }
       }
         updateLikes()
@@ -84,7 +88,8 @@ const MovieSwiping = () => {
             const { data } = await axios.put(`${API_URL}/preferences/dislikes/${allMovies[count]._id}`)
             console.log('updatedb - DATA ->', data)
           } catch (error) {
-            setErrors(error)
+            setError(error)
+            setErrorStatus(error.response.status)
           }
         }
         updateDislikes()
@@ -94,9 +99,9 @@ const MovieSwiping = () => {
   
   return (
     <Container>
-    {  errors ? 
-        <UnauthorisedMessage/>
-        // <NeedToLogIn/>
+    {  errorStatus === 401 ? 
+        // <UnauthorisedMessage/>
+        <NeedToLogIn/>
       :
       allMovies ?
         moviesRemaining === 0 ? 

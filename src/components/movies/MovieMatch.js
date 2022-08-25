@@ -3,8 +3,8 @@ import { Navigate, useNavigate } from 'react-router-dom'
 import { API_URL } from "../../config.js"
 import axios from 'axios'
 
-// import NeedToLogIn from '../helpers/redirect.js'
-import {UnauthorisedMessage} from '../helpers/auth.js'
+import NeedToLogIn from '../helpers/redirect.js'
+// import {UnauthorisedMessage} from '../helpers/auth.js'
 
 const Match = () => {
 
@@ -14,6 +14,8 @@ const Match = () => {
   const [allUsersAndTheirLikes, setAllUsersAndTheirLikes] = useState([])
   const [watchWith, setWatchWith] = useState({username: ''})
   const [error, setError] = useState()
+  const [errorStatus, setErrorStatus] = useState()
+ 
   // const [userExists, setUserExists] = useState(false)
   const [filteredMovies, setFilteredMovies] = useState([])
   // const [allMoviesStyling, setAllMoviesStyling] = useState('')
@@ -45,6 +47,7 @@ const Match = () => {
       } catch (error) {
         console.log(error)
         setError(error)
+        setErrorStatus(error.response.status)
       }
     }
     getUserData()
@@ -62,6 +65,7 @@ const Match = () => {
       } catch (error) {
         console.log(error)
         setError(setError)
+        setErrorStatus(error.response.status)
       }
     }
     getAllUsersAndTheirLikes()
@@ -115,9 +119,9 @@ const Match = () => {
 
 return (
   <>
-    { error ?
-      <UnauthorisedMessage/>
-       // <NeedToLogIn/>
+    { errorStatus === 401 ?
+      // <UnauthorisedMessage/>
+       <NeedToLogIn/>
     :
     <div className='matchContainer'>
         <h1> I am Watching With  </h1>
