@@ -45,8 +45,8 @@ function App() {
             <Route path="/profile" element={<ProfilePage></ProfilePage>}></Route>
           </Routes>
         </BrowserRouter>
+        <StickyFooterBar></StickyFooterBar>
       </div>
-      <StickyFooterBar></StickyFooterBar>
     </>
   )
 }
