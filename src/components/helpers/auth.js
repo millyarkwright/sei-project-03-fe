@@ -2,6 +2,8 @@ import axios from 'axios'
 import { Buffer } from 'buffer'
 // might need to run npm i buffer -> buffer decodes an encoded string 
 
+import { useNavigate } from 'react-router-dom'
+
 // setting token
 
 export const setToken = (token) => {
@@ -42,5 +44,11 @@ export const userIsAuthenticated = () => {
   return currentTime < payload.exp
 }
 
-
-
+// // unauthorised to view pages
+// export const NeedToLogIn = () => {
+//   const navigate = useNavigate()
+//   useEffect(() => {
+//     navigate('/login')
+//   },[])
+//   return <h1>Redirecting to login page</h1>
+// }
