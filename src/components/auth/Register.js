@@ -10,13 +10,14 @@ import Row from 'react-bootstrap/Row'
 
 
 const Register = () => {
+  
   const navigate = useNavigate()
+
   const [ formData, setFormData ] = useState({
     email : '',
     username : '',
     password : '',
     confirmPassword : '',
-    // moviesLiked : '',
   })
   const [error, setError ] = useState('')
 
