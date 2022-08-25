@@ -8,8 +8,8 @@ import { getUserName } from "./helpers/auth"
 import Container from 'react-bootstrap/Container'
 
 // Import Helpers
-// import NeedToLogIn from './helpers/redirect.js'
-import { UnauthorisedMessage } from "./helpers/auth.js"
+import NeedToLogIn from './helpers/redirect.js'
+// import { UnauthorisedMessage } from "./helpers/auth.js"
 
 
 const MovieSwiping = () => {
@@ -19,6 +19,7 @@ const MovieSwiping = () => {
   const [moviesRemaining, setMoviesRemaining] = useState()
   const [allMovies, setAllMovies] = useState('')
   const [errors, setErrors] = useState('')
+  const [errorStatus, setErrorStatus] = useState()
  
 
   // ! Get all movie data & movie Ids
@@ -58,7 +59,9 @@ const MovieSwiping = () => {
         console.log('userdata', data)
         setUserData(data)
       } catch (error) {
-        console.log(error)
+        console.log('error',error.response.status)
+        setErrors(error)
+        setErrorStatus(error.response.status)
       }
     }
     getUserData()
@@ -75,6 +78,7 @@ const MovieSwiping = () => {
           console.log('updatedb - DATA ->', data)
         } catch (error) {
           setErrors(error)
+          setErrorStatus(error.response.status)
         }
       }
         updateLikes()
@@ -85,6 +89,7 @@ const MovieSwiping = () => {
             console.log('updatedb - DATA ->', data)
           } catch (error) {
             setErrors(error)
+            setErrorStatus(error.response.status)
           }
         }
         updateDislikes()
@@ -94,9 +99,9 @@ const MovieSwiping = () => {
   
   return (
     <Container>
-    {  errors ? 
-        <UnauthorisedMessage/>
-        // <NeedToLogIn/>
+    {  errorStatus === 401 ? 
+        // <UnauthorisedMessage/>
+        <NeedToLogIn/>
       :
       allMovies ?
         moviesRemaining === 0 ? 
