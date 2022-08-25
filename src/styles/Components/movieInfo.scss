@@ -1,23 +1,22 @@
-.movieInfo-wrapper {
-  margin: 5px 100px;
-  border: 1px solid black;
+button.back-button {
+  margin: 5px 15px;
+  padding: 5px 10px;
+  border-radius: 10px;
   background-color: $bgdark;
-  box-shadow: $box-shadow;
+  color: white;
+  border: solid;
 }
-
 header {
   display: flex;
-  justify-content: space-evenly;
   padding: 15px 50px;
-  color: $headercolor;
+  color: black;
   h1 {
-    padding-left: 20px;
+    font-size:30px;
   }
   div {
     padding-right: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     p {
       margin-top: 0;
       margin-bottom: 0;
@@ -28,49 +27,70 @@ header {
 .movieInfo-container  {
   margin: 0px 50px 50px 50px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .movieImage {
   padding: 5px;
   img {
-    border-radius: 5px;
+    margin-left: 20px;
     max-width: 100%;
   }
 } 
 
 .movieDetails {
   padding: 5px;
-  color: $paracolor;
+  color: black;
   div {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     p {
       margin-bottom: 8px;
     }
   }
+
+  .actors-and-directors-container {
+    display: flex;
+    flex-direction: column;
+}
+.lead{
+  margin-left: 25px;
+}
+.movieDetails.col-md-8 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.button-style-div {
+  display: flex;
+  justify-content: space-around;
+}
   .genre-container  {
-    justify-content: center;
     .genre {
       margin: 5px 15px;
       padding: 5px 10px;
       border-radius: 10px;
       background-color: $bglight;
       color: $black;
+      border: solid;
     }
   }
-  .actors-container {
+  .actors-container, .directors-container {
     justify-content: center;
   }
+  p.actors, p.directors {
+    margin-left: 10px;
+}
   .imdbLink {
-    background: $bglight;
-    border: 1px solid $bglight;
-    box-shadow: $box-shadow;
-    border-radius: 10px;
+    margin: 5px 15px;
     padding: 5px 10px;
+    border-radius: 10px;
+    background-color: $bgdark;
+    color: white;
+    border: solid;
       a {
         text-decoration: none;
-        color: $black;
+        color: white;
       }
     }
 }
