@@ -4,6 +4,9 @@ import axios from "axios"
 import { API_URL } from "../config.js"
 import { getUserName } from "./helpers/auth"
 
+// Import React Bootstrap Components 
+import Container from 'react-bootstrap/Container'
+
 const MovieSwiping = () => {
 
   const [count, setCount] = useState(0)
@@ -87,7 +90,7 @@ const MovieSwiping = () => {
     }
   
   return (
-    <main>
+    <Container>
     { allMovies ?
         <> 
           <div className='movieSwipe-wrapper'>
@@ -114,7 +117,7 @@ const MovieSwiping = () => {
       :
       <h2> 'loading' </h2>
     }
-  </main>
+  </Container>
   )
 }
 
