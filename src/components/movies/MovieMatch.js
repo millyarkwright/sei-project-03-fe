@@ -3,8 +3,9 @@ import { Navigate, useNavigate } from 'react-router-dom'
 import { API_URL } from "../../config.js"
 import axios from 'axios'
 
-const Match = () => {
+import NeedToLogIn from '../helpers/redirect.js'
 
+const Match = () => {
 
   const navigate = useNavigate()
   // ! State
@@ -64,7 +65,7 @@ const Match = () => {
     }
     getAllUsersAndTheirLikes()
   }, [])
-  console.log('allUsersAndTheirLikes', allUsersAndTheirLikes)
+  // console.log('allUsersAndTheirLikes', allUsersAndTheirLikes)
 
 
   // ! Executions
@@ -81,7 +82,7 @@ const Match = () => {
 
     const foundUser = allUsersAndTheirLikes.find(user => user.username === watchWith.username)
 
-    console.log('foundUser (handlesub)->',foundUser)
+    // console.log('foundUser (handlesub)->',foundUser)
 
     if (foundUser) {
       const userMoviesLiked = userData.moviesLiked
@@ -102,7 +103,7 @@ const Match = () => {
   //   const userMoviesLiked = userData.moviesLiked
     // const foundUserMoviesLiked = foundUser.moviesLiked
   // console.log(moviesInCommon)
-  console.log(filteredMovies)
+  // console.log(filteredMovies)
   // console.log('allUsersAndTheirLikes', allUsersAndTheirLikes)
   // console.log('foundUser->',foundUser)
   // console.log('error', error)
@@ -113,22 +114,26 @@ const Match = () => {
 
 return (
   <>
+    { error ?
+      <NeedToLogIn/>
+    :
     <div className='matchContainer'>
-      <h1> I am Watching With  </h1>
-      <div className='form'>
-        <form onSubmit={handleSubmit}>
-            <input 
-              type='text'
-              name='username' 
-              value={watchWith.username}
-              placeholder='Username' 
-              onChange={handleFieldChange}>
-            </input>
-            <input type='submit' value="Submit" className='btn w-100'/>
-        </form>
-      </div>   
-      <h2> {error && error.message} </h2>
+        <h1> I am Watching With  </h1>
+        <div className='form'>
+          <form onSubmit={handleSubmit}>
+              <input 
+                type='text'
+                name='username' 
+                value={watchWith.username}
+                placeholder='Username' 
+                onChange={handleFieldChange}>
+              </input>
+              <input type='submit' value="Submit" className='btn w-100'/>
+          </form>
+        </div>   
+        <h2> {error && error.message} </h2>
     </div>
+    }  
   </>
 )
 }
