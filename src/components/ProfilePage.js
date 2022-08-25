@@ -1,18 +1,23 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
 import { API_URL } from "../config.js"
+import { useNavigate } from 'react-router-dom'
+
+// Import Helpers
+import NeedToLogIn from './helpers/redirect.js'
 
 const ProfilePage = () => {
 
+  const navigate = useNavigate()
+  
   const [userInfo, setUserInfo] = useState([])
-
   const [userPasswords, setUserPasswords] = useState({
-    password: "", 
-    newPassword: "", 
-    newConfirmPassword: ""
+    currentPassword: "",
+    newPassword: "",
+    newPasswordConfirm: ""
   })
 
-  const [formError, setFormError] = useState("")
+  const [formError, setFormError] = useState()
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -22,6 +27,7 @@ const ProfilePage = () => {
         setUserInfo(data)
       } catch (error) {
         console.log(error)
+        setFormError(error)
       }
     }
     fetchUserInfo()
@@ -30,8 +36,9 @@ const ProfilePage = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault()
     try {
-      const { data } = await axios.put(`${API_URL}/register/`, userPasswords)
+      const { data } = await axios.put(`${API_URL}/register`, userPasswords)
     } catch (error) {
+      setFormError(error)
       console.log("pw change error", error)
     }
   }
@@ -40,10 +47,13 @@ const ProfilePage = () => {
     const newData = { ...userPasswords, [event.target.name]: event.target.value }
     setUserPasswords(newData)
   }
-  
+
   return (
     <>
-      <h1>hello</h1>
+      {formError ? 
+        <NeedToLogIn/>
+      :
+      <>
       <div className="user-info-div">
         <div className="left-column-user-info">
           <p>Your username is:</p>
@@ -72,8 +82,11 @@ const ProfilePage = () => {
           <input type="submit" value="Change Password" />
         </form>
       </div>
-    </>
-  )
+      </>
+      }
+      </>
+    )
 }
+
 
 export default ProfilePage

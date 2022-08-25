@@ -8,6 +8,10 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 
+// Import Helpers
+import NeedToLogIn from '../helpers/redirect.js'
+
+
 const MovieInfo = () => {
 
   const { movieId } = useParams()
@@ -30,55 +34,58 @@ const MovieInfo = () => {
 
   return (
       <Container className="movieInfo-wrapper">
-      {movie ?
-        <>
-        <header className="movieInfo">
-          <h1>{movie.name}</h1>
-          <div className="imdbRating">
-            <p>IMDb RATING</p>
-            <p>⭐️ {movie.rating}/10</p>
-          </div>
-        </header>
-        <Row className="movieInfo-container">
-          <Col className="movieImage" md="4">
-            <img src={movie.image_url} alt="Movie Poster"></img>
-          </Col>
-          <Col className="movieDetails" md="8">
-            <div className="genre-container">
-              {movie.genre.map(genre => {
-              return (
-                <div className="genre" key={genre}>{genre}</div>
-              )
-              })}
+      { errors ?
+        <NeedToLogIn/>
+        :
+        movie ?
+          <>
+          <header className="movieInfo">
+            <h1>{movie.name}</h1>
+            <div className="imdbRating">
+              <p>IMDB RATING</p>
+              <p>⭐️ {movie.rating}/10</p>
             </div>
-            <p className="lead">{movie.desc}</p>
-            <div>
-              <h4>Stars</h4>
-              <div className="actors-container">
-                {movie.actors.map(actor => {
+          </header>
+          <Row className="movieInfo-container">
+            <Col className="movieImage" md="4">
+              <img src={movie.image_url} alt="Movie Poster"></img>
+            </Col>
+            <Col className="movieDetails" md="8">
+              <div className="genre-container">
+                {movie.genre.map(genre => {
                 return (
-                  <p className="actors" key={actor}>{actor}</p>
+                  <div className="genre" key={genre}>{genre}</div>
                 )
                 })}
               </div>
-            </div>
-            <div className="directors-container">
-              <h4>Director(s)</h4>
-              {movie.directors.map(director => {
-              return (
-                <p className="directors" key={director}>{director}</p>
-              )
-              })}
-            </div>
-            <button className="imdbLink"><a href={`https://www.imdb.com${movie.imdb_url}`}target="_blank" rel="noreferrer">Take me to IMDb</a></button>
-          </Col>
-        </Row>
-        </>
-        :
-        <h2>
-          {errors ? 'Something went wrong. Please try again later.' : 'Loading...'}
-        </h2>
-        }
+              <p className="lead">{movie.desc}</p>
+              <div>
+                <h4>Stars</h4>
+                <div className="actors-container">
+                  {movie.actors.map(actor => {
+                  return (
+                    <p className="actors" key={actor}>{actor}</p>
+                  )
+                  })}
+                </div>
+              </div>
+              <div className="directors-container">
+                <h4>Director(s)</h4>
+                {movie.directors.map(director => {
+                return (
+                  <p className="directors" key={director}>{director}</p>
+                )
+                })}
+              </div>
+              <button className="imdbLink"><a href={`https://www.imdb.com${movie.imdb_url}`}target="_blank" rel="noreferrer">Take me to IMDb</a></button>
+            </Col>
+          </Row>
+          </>
+          :
+          <h2>
+            {errors ? 'Something went wrong. Please try again later.' : 'Loading...'}
+          </h2>
+      }
       </Container>
   )
 }

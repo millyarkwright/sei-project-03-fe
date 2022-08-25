@@ -14,6 +14,7 @@ import MovieInfo from './components/movies/MovieInfo'
 import MovieSwiping from './components/MovieSwiping'
 import Match from './components/movies/MovieMatch'
 import ProfilePage from './components/ProfilePage'
+import NotFoundPage from './components/NotFoundPage'
 
 
 
@@ -43,6 +44,7 @@ function App() {
             <Route path="/swipe" element={<MovieSwiping></MovieSwiping>}></Route>
             <Route path="/match" element={<Match></Match>}></Route>
             <Route path="/profile" element={<ProfilePage></ProfilePage>}></Route>
+            <Route path="*" element={<NotFoundPage></NotFoundPage>}></Route>
           </Routes>
         </BrowserRouter>
       </div>

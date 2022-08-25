@@ -1,20 +1,38 @@
 import {useState, useEffect} from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { API_URL } from "../../config.js"
 import axios from 'axios'
 
+import NeedToLogIn from '../helpers/redirect.js'
+
 const Match = () => {
 
+  const navigate = useNavigate()
   // ! State
   const [userData, setUserData] = useState()
-  const [allUserPreferences, setAllUserPreferences] = useState([])
+  const [allUsersAndTheirLikes, setAllUsersAndTheirLikes] = useState([])
   const [watchWith, setWatchWith] = useState({username: ''})
   const [error, setError] = useState()
-  const [userExists, setUserExists] = useState(false)
-  const [foundUser, setFoundUser] = useState()
+  // const [userExists, setUserExists] = useState(false)
   const [filteredMovies, setFilteredMovies] = useState([])
+  // const [allMoviesStyling, setAllMoviesStyling] = useState('')
 
   console.log('watch with', watchWith)
+
+  // useEffect(() => {
+  //   const pullMovies = async () => {
+  //     try {
+  //       const { data } = await axios.get(`${API_URL}/movies`)
+  //       const movieImages = data.map(movie => movie.image_url)
+  //       setAllMoviesStyling(Object.values(movieImages).sort(() => 0.5 - Math.random()).slice(0, 20))
+  //     } catch (error) {
+  //       setError(error)
+  //     }
+  //   }
+  //   pullMovies()
+  // },[])
+  // console.log(allMoviesStyling)
+  // console.log('allMoviesStyling->',typeof allMoviesStyling)
 
   // Get LoggedIn User Data
   useEffect(() => {
@@ -34,34 +52,21 @@ const Match = () => {
   //   // Get all user preferences
 
   useEffect(() => {
-    const getAllUserPreferences = async () => {
+    const getAllUsersAndTheirLikes = async () => {
       try {
         const { data } = await axios.get(`${API_URL}/preferences/all`)
         console.log('alluserPreference data', data)
-        setAllUserPreferences(data)
+        setAllUsersAndTheirLikes(data)
+        console.log(allUsersAndTheirLikes)
       } catch (error) {
         console.log(error)
         setError(setError)
       }
     }
-    getAllUserPreferences()
+    getAllUsersAndTheirLikes()
   }, [])
-  console.log('allUserPreferences', allUserPreferences)
+  // console.log('allUsersAndTheirLikes', allUsersAndTheirLikes)
 
-
-  useEffect(() => {
-    foundUser && 
-    console.log('reached line 54')
-    console.log('userData->', userData)
-    console.log('foundUser (useeffect)->', foundUser)
-    // const userMoviesLiked = userData.moviesLiked
-    // const foundUserMoviesLiked = foundUser.moviesLiked
-    // setFilteredMovies(userMoviesLiked.filter((movie) => {
-    //   return foundUserMoviesLiked.includes(movie)
-    // }))
-    // console.log('userData.moviesLiked',  userMoviesLiked)
-    // console.log('foundUser.moviesLiked',  foundUserMoviesLiked)
-  }, [foundUser])
 
   // ! Executions
 
@@ -75,22 +80,31 @@ const Match = () => {
     event.preventDefault()
     // ERROR TEST
 
-    const foundUser = allUserPreferences.find(user => user.username === watchWith.username)
+    const foundUser = allUsersAndTheirLikes.find(user => user.username === watchWith.username)
 
-    console.log('foundUser (handlesub)->',foundUser)
+    // console.log('foundUser (handlesub)->',foundUser)
 
-    foundUser ? setFoundUser(foundUser) : setError({ message: 'please enter a valid username to match with'})
-
+    if (foundUser) {
+      const userMoviesLiked = userData.moviesLiked
+      const foundUserMoviesLiked = foundUser.moviesLiked
+      const filteredMovies = userMoviesLiked.filter((movie) => {
+              return foundUserMoviesLiked.includes(movie)
+    })
+    if (filteredMovies.length === 0){
+      setError({message: 'no films, pls like more films :)' })
+    } else {
+    navigate(`/movies/${filteredMovies[Math.floor(Math.random() * filteredMovies.length)]}`)}
+    } else {
+      setError({ message: 'please enter a valid username to match with'})
+    }
   }
 
-
-  
 
   //   const userMoviesLiked = userData.moviesLiked
     // const foundUserMoviesLiked = foundUser.moviesLiked
   // console.log(moviesInCommon)
-  console.log(filteredMovies)
-  // console.log('allUserPreferences', allUserPreferences)
+  // console.log(filteredMovies)
+  // console.log('allUsersAndTheirLikes', allUsersAndTheirLikes)
   // console.log('foundUser->',foundUser)
   // console.log('error', error)
 
@@ -100,20 +114,26 @@ const Match = () => {
 
 return (
   <>
-    <h1> landed at Match </h1>
-    <div className='form'>
-      <form onSubmit={handleSubmit}>
-          <input 
-            type='text'
-            name='username' 
-            value={watchWith.username}
-            placeholder='Username' 
-            onChange={handleFieldChange}>
-          </input>
-          <input type='submit' value="Match with friend" className='btn w-100'/>
-      </form>
-    </div>   
-    <h2> {error && error.message} </h2>
+    { error ?
+      <NeedToLogIn/>
+    :
+    <div className='matchContainer'>
+        <h1> I am Watching With  </h1>
+        <div className='form'>
+          <form onSubmit={handleSubmit}>
+              <input 
+                type='text'
+                name='username' 
+                value={watchWith.username}
+                placeholder='Username' 
+                onChange={handleFieldChange}>
+              </input>
+              <input type='submit' value="Submit" className='btn w-100'/>
+          </form>
+        </div>   
+        <h2> {error && error.message} </h2>
+    </div>
+    }  
   </>
 )
 }
@@ -138,16 +158,16 @@ export default Match
 //   // Get all user preferences
 
 //   useEffect(() => {
-//     const getAllUserPreferences = async () => {
+//     const getallUsersAndTheirLikes = async () => {
 //       try {
 //         const { data } = await axios.get(`${API_URL}/preferences/all`)
 //         console.log('alluserPreference data', data)
-//         setAllUserPreferences(data)
+//         setallUsersAndTheirLikes(data)
 //       } catch (error) {
 //         console.log(error)
 //       }
 //     }
-//     getAllUserPreferences()
+//     getallUsersAndTheirLikes()
 //   }, [])
 
 //   const handleFieldChange = (event, index) => {
