@@ -13,6 +13,16 @@
   height: calc(100vh - 110px);
 }
 
+.movieSwipe-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 50px 50px 50px;
+  padding: 20px;
+  background-color: lightgrey;
+  height: 90%;
+}
+
 main{
   flex-grow: 1;
 }
