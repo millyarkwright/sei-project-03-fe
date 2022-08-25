@@ -1,14 +1,18 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
 import { API_URL } from "../config.js"
+import { Navigate, useNavigate } from 'react-router-dom'
+import { userIsAuthenticated } from './helpers/auth'
 
 const ProfilePage = () => {
 
-  const [userInfo, setUserInfo] = useState([])
+  const navigate = useNavigate()
 
+
+  const [userInfo, setUserInfo] = useState([])
   const [userPasswords, setUserPasswords] = useState({
-    currentPassword: "", 
-    newPassword: "", 
+    currentPassword: "",
+    newPassword: "",
     newPasswordConfirm: ""
   })
 
@@ -30,7 +34,7 @@ const ProfilePage = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault()
     try {
-      const { data } = await axios.put(`${API_URL}/register/`, formData)
+      const { data } = await axios.put(`${API_URL}/register/`, userPasswords)
     } catch (error) {
       console.log("pw change error", error)
     }
@@ -40,10 +44,11 @@ const ProfilePage = () => {
     const newData = { ...userPasswords, [event.target.name]: event.target.value }
     setUserPasswords(newData)
   }
-  
+
   return (
     <>
-      <h1>hello</h1>
+      {userIsAuthenticated() ? 
+      <>
       <div className="user-info-div">
         <div className="left-column-user-info">
           <p>Your username is:</p>
@@ -72,6 +77,8 @@ const ProfilePage = () => {
           <input type="submit" value="Change Password" />
         </form>
       </div>
+      </>
+        : navigate("/login")}
     </>
   )
 }
