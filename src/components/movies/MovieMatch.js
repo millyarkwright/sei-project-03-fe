@@ -94,7 +94,7 @@ const Match = () => {
     } else {
     navigate(`/movies/${filteredMovies[Math.floor(Math.random() * filteredMovies.length)]}`)}
     } else {
-      setError({ message: 'please enter a valid username to match with'})
+      setError({ message: 'Please enter a valid username.'})
     }
   }
 
@@ -112,9 +112,9 @@ const Match = () => {
   // ! JSX
 
 return (
-  <>
-    <div className='matchContainer'>
-      <h1> I am Watching With  </h1>
+  <main className="movieMatch">
+    <div className='match-container'>
+      <h1> I am watching with...  </h1>
       <div className='form'>
         <form onSubmit={handleSubmit}>
             <input 
@@ -129,7 +129,7 @@ return (
       </div>   
       <h2> {error && error.message} </h2>
     </div>
-  </>
+  </main>
 )
 }
 
