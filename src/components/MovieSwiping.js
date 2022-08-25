@@ -8,7 +8,9 @@ import { getUserName } from "./helpers/auth"
 import Container from 'react-bootstrap/Container'
 
 // Import Helpers
-import NeedToLogIn from './helpers/redirect.js'
+// import NeedToLogIn from './helpers/redirect.js'
+import { UnauthorisedMessage } from "./helpers/auth.js"
+
 
 const MovieSwiping = () => {
 
@@ -93,7 +95,8 @@ const MovieSwiping = () => {
   return (
     <Container>
     {  errors ? 
-        <NeedToLogIn/>
+        <UnauthorisedMessage/>
+        // <NeedToLogIn/>
       :
       allMovies ?
         moviesRemaining === 0 ? 

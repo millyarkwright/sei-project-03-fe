@@ -3,7 +3,8 @@ import { Navigate, useNavigate } from 'react-router-dom'
 import { API_URL } from "../../config.js"
 import axios from 'axios'
 
-import NeedToLogIn from '../helpers/redirect.js'
+// import NeedToLogIn from '../helpers/redirect.js'
+import {UnauthorisedMessage} from '../helpers/auth.js'
 
 const Match = () => {
 
@@ -115,7 +116,8 @@ const Match = () => {
 return (
   <>
     { error ?
-      <NeedToLogIn/>
+      <UnauthorisedMessage/>
+       // <NeedToLogIn/>
     :
     <div className='matchContainer'>
         <h1> I am Watching With  </h1>
