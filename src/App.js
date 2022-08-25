@@ -44,7 +44,6 @@ function App() {
             <Route path="/swipe" element={<MovieSwiping></MovieSwiping>}></Route>
             <Route path="/match" element={<Match></Match>}></Route>
             <Route path="/profile" element={<ProfilePage></ProfilePage>}></Route>
-            <Route path="/profile" element={<ProfilePage></ProfilePage>}></Route>
           </Routes>
         </BrowserRouter>
       </div>
