@@ -1,24 +1,28 @@
 .movieSwipe-wrapper {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   margin: 20px 50px 50px 50px;
   padding: 20px;
   background-color: lightgrey;
+  height: calc(100vh)
 }
 
 .preference-container {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.preferenceButtons {
-  margin: 20px 50px;
-  button {
-    padding: 30px 50px;
-    margin: 0px 20px;
-    font-size: 40px;
+  .preferenceButtons {
+    margin: 20px 50px;
+    button {
+      padding: 30px 50px;
+      margin: 0px 20px;
+      font-size: 40px;
+    }
+  }
+  img {
+    max-width: 100px;
   }
 }
+

@@ -29,8 +29,7 @@ const MovieInfo = () => {
   }, [movieId])
 
   return (
-    <main>
-      <section className="movieInfo-wrapper">
+      <Container className="movieInfo-wrapper">
       {movie ?
         <>
         <header className="movieInfo">
@@ -40,11 +39,11 @@ const MovieInfo = () => {
             <p>⭐️ {movie.rating}/10</p>
           </div>
         </header>
-        <div className="movieInfo-container">
-          <div className="movieImage">
+        <Row className="movieInfo-container">
+          <Col className="movieImage" md="4">
             <img src={movie.image_url} alt="Movie Poster"></img>
-          </div>
-          <div className="movieDetails">
+          </Col>
+          <Col className="movieDetails" md="8">
             <div className="genre-container">
               {movie.genre.map(genre => {
               return (
@@ -52,14 +51,16 @@ const MovieInfo = () => {
               )
               })}
             </div>
-            <h3>{movie.desc}</h3>
-            <div className="actors-container">
+            <p className="lead">{movie.desc}</p>
+            <div>
               <h4>Stars</h4>
-              {movie.actors.map(actor => {
-              return (
-                <p className="actors" key={actor}>{actor}</p>
-              )
-              })}
+              <div className="actors-container">
+                {movie.actors.map(actor => {
+                return (
+                  <p className="actors" key={actor}>{actor}</p>
+                )
+                })}
+              </div>
             </div>
             <div className="directors-container">
               <h4>Director(s)</h4>
@@ -70,16 +71,15 @@ const MovieInfo = () => {
               })}
             </div>
             <button className="imdbLink"><a href={`https://www.imdb.com${movie.imdb_url}`}target="_blank" rel="noreferrer">Take me to IMDb</a></button>
-          </div>
-        </div>
+          </Col>
+        </Row>
         </>
         :
         <h2>
           {errors ? 'Something went wrong. Please try again later.' : 'Loading...'}
         </h2>
         }
-      </section>
-    </main>
+      </Container>
   )
 }
 

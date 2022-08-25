@@ -1,12 +1,15 @@
 .movieInfo-wrapper {
   margin: 5px 100px;
   border: 1px solid black;
+  background-color: $bgdark;
+  box-shadow: $box-shadow;
 }
 
 header {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   padding: 15px 50px;
+  color: $headercolor;
   h1 {
     padding-left: 20px;
   }
@@ -24,26 +27,27 @@ header {
 
 .movieInfo-container  {
   margin: 0px 50px 50px 50px;
-  border: 1px solid black;
   display: flex;
+  align-items: center;
 }
 
 .movieImage {
   padding: 5px;
-  height: 100%;
-  max-width: 50%;
   img {
     border-radius: 5px;
-    height: 100%;
     max-width: 100%;
   }
 } 
 
 .movieDetails {
   padding: 5px;
+  color: $paracolor;
   div {
     display: flex;
     align-items: center;
+    p {
+      margin-bottom: 8px;
+    }
   }
   .genre-container  {
     justify-content: center;
@@ -51,9 +55,23 @@ header {
       margin: 5px 15px;
       padding: 5px 10px;
       border-radius: 10px;
-      background-color: red;
+      background-color: $bglight;
+      color: $black;
     }
   }
-
+  .actors-container {
+    justify-content: center;
+  }
+  .imdbLink {
+    background: $bglight;
+    border: 1px solid $bglight;
+    box-shadow: $box-shadow;
+    border-radius: 10px;
+    padding: 5px 10px;
+      a {
+        text-decoration: none;
+        color: $black;
+      }
+    }
 }
 
