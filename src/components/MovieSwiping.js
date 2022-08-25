@@ -90,10 +90,10 @@ const MovieSwiping = () => {
     }
   
   return (
-    <Container>
+    <main className="movieSwiping-wrapper">
     { allMovies ?
         <> 
-          <div className='movieSwipe-wrapper'>
+          <div className='movieSwipe-container'>
             <h2>{allMovies[count].name}</h2>
             <p> {allMovies[count].year}</p>
             <div className="preference-container">
@@ -117,7 +117,7 @@ const MovieSwiping = () => {
       :
       <h2> 'loading' </h2>
     }
-  </Container>
+  </main>
   )
 }
 

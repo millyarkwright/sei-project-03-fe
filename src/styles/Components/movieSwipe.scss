@@ -1,12 +1,18 @@
-.movieSwipe-wrapper {
+.movieSwiping-wrapper {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  align-items: center;
+  
+}
+
+.movieSwipe-container {
+  display: flex;
+  flex-direction: column;
   align-items: center;
   margin: 20px 50px 50px 50px;
   padding: 20px;
   background-color: lightgrey;
-  height: calc(100vh)
+  min-height: 100vh;
 }
 
 .preference-container {
