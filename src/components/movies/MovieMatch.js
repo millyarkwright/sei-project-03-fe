@@ -12,26 +12,26 @@ const Match = () => {
   const [allUsersAndTheirLikes, setAllUsersAndTheirLikes] = useState([])
   const [watchWith, setWatchWith] = useState({username: ''})
   const [error, setError] = useState()
-  const [userExists, setUserExists] = useState(false)
+  // const [userExists, setUserExists] = useState(false)
   const [filteredMovies, setFilteredMovies] = useState([])
-  const [allMoviesStyling, setAllMoviesStyling] = useState('')
+  // const [allMoviesStyling, setAllMoviesStyling] = useState('')
 
   console.log('watch with', watchWith)
 
-  useEffect(() => {
-    const pullMovies = async () => {
-      try {
-        const { data } = await axios.get(`${API_URL}/movies`)
-        const movieImages = data.map(movie => movie.image_url)
-        setAllMoviesStyling(Object.values(movieImages).sort(() => 0.5 - Math.random()).slice(0, 20))
-      } catch (error) {
-        setError(error)
-      }
-    }
-    pullMovies()
-  },[])
-  console.log(allMoviesStyling)
-  console.log('allMoviesStyling->',typeof allMoviesStyling)
+  // useEffect(() => {
+  //   const pullMovies = async () => {
+  //     try {
+  //       const { data } = await axios.get(`${API_URL}/movies`)
+  //       const movieImages = data.map(movie => movie.image_url)
+  //       setAllMoviesStyling(Object.values(movieImages).sort(() => 0.5 - Math.random()).slice(0, 20))
+  //     } catch (error) {
+  //       setError(error)
+  //     }
+  //   }
+  //   pullMovies()
+  // },[])
+  // console.log(allMoviesStyling)
+  // console.log('allMoviesStyling->',typeof allMoviesStyling)
 
   // Get LoggedIn User Data
   useEffect(() => {
@@ -113,20 +113,22 @@ const Match = () => {
 
 return (
   <>
-    <h1> landed at Match </h1>
-    <div className='form'>
-      <form onSubmit={handleSubmit}>
-          <input 
-            type='text'
-            name='username' 
-            value={watchWith.username}
-            placeholder='Username' 
-            onChange={handleFieldChange}>
-          </input>
-          <input type='submit' value="Match with friend" className='btn w-100'/>
-      </form>
-    </div>   
-    <h2> {error && error.message} </h2>
+    <div className='matchContainer'>
+      <h1> I am Watching With  </h1>
+      <div className='form'>
+        <form onSubmit={handleSubmit}>
+            <input 
+              type='text'
+              name='username' 
+              value={watchWith.username}
+              placeholder='Username' 
+              onChange={handleFieldChange}>
+            </input>
+            <input type='submit' value="Submit" className='btn w-100'/>
+        </form>
+      </div>   
+      <h2> {error && error.message} </h2>
+    </div>
   </>
 )
 }

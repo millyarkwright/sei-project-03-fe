@@ -35,7 +35,7 @@ const MovieInfo = () => {
         <header className="movieInfo">
           <h1>{movie.name}</h1>
           <div className="imdbRating">
-            <p>IMDb RATING</p>
+            <p>IMDB RATING</p>
             <p>⭐️ {movie.rating}/10</p>
           </div>
         </header>
