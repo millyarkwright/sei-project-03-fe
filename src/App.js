@@ -10,6 +10,8 @@ import MovieSwiping from './components/MovieSwiping'
 import Match from './components/movies/MovieMatch'
 import ProfilePage from './components/ProfilePage'
 import NotFoundPage from './components/NotFoundPage'
+import Homepage from './components/Homepage'
+
 function App() {
   useEffect(() => {
     // if localstorage token exists, set axios default headers to token, if not, set to null
@@ -26,7 +28,7 @@ function App() {
         <BrowserRouter>
           <PageNavBar/>
           <Routes>
-            <Route path="/" element={<Match />} />
+            <Route path="/" element={<Homepage />} />
             <Route path="/movies/:movieId" element={<MovieInfo />} />
             <Route path="/login" element={<Login></Login>}></Route>
             <Route path="/register" element={<Register></Register>}></Route>
