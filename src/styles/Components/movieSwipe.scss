@@ -23,11 +23,10 @@
     padding: 5px;
     min-width: 250px;
     max-width: 400px;
-    // width: 500px;
     img {
     border-radius: 5px;
     margin-left: 0px;
-    // width: calc(100vh*0.4);
+    max-width: 300px;
     }
   }
   .preferenceButtons {
@@ -85,7 +84,7 @@ h2#movies-name {
 @media (max-width: 650px) {
   .preference-container {
     .movieImage {
-      min-width: 200px;
+      min-width: 150px;
     }
     .preferenceButtons {
       margin: 30px 20px;
