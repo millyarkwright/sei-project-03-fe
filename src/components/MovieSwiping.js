@@ -140,7 +140,7 @@ const MovieSwiping = () => {
         {<h2>Loading</h2>}
       </>
     }
-  </main>
+  </Container>
   )
 }
 
