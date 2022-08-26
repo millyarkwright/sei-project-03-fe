@@ -3,17 +3,13 @@ import { Link } from 'react-router-dom'
 import axios from "axios"
 import { API_URL } from "../config.js"
 import { getUserName } from "./helpers/auth"
-
 // Import React Bootstrap Components 
 import Container from 'react-bootstrap/Container'
-
 // Import Helpers
 import NeedToLogIn from './helpers/redirect.js'
 // import { UnauthorisedMessage } from "./helpers/auth.js"
 
-
 const MovieSwiping = () => {
-
   const [count, setCount] = useState(0)
   const [userData, setUserData] = useState([])
   const [moviesRemaining, setMoviesRemaining] = useState()
@@ -21,7 +17,6 @@ const MovieSwiping = () => {
   const [error, setError] = useState('')
   const [errorStatus, setErrorStatus] = useState()
  
-
   // ! Get all movie data & movie Ids
   useEffect(() => {
     const pullMovies = async () => {
@@ -32,9 +27,6 @@ const MovieSwiping = () => {
           const movieAlreadyDisliked = userData.moviesDisliked.map(dislikedMovie => dislikedMovie).includes(movie._id)
           return !(movieAlreadyLiked || movieAlreadyDisliked)
         })
-        // console.log("USer liked", userData.moviesLiked)
-        // console.log('filtereddata->', filteredData)
-        // console.log('movies liked array', userData.moviesLiked)
         setAllMovies(filteredData)
       } catch (error) {
         setError(error)
@@ -42,40 +34,30 @@ const MovieSwiping = () => {
     }
     pullMovies()
   },[userData])
-  console.log('allmovies->',allMovies)
-
   // If user has been through all movies
   useEffect(() => {
     const moviesRemaining = allMovies.length
     setMoviesRemaining(moviesRemaining)
   },[allMovies])
-
   // ! Get User Data
-
   useEffect(() => {
     const getUserData = async () => {
       try {
         const { data } = await axios.get(`${API_URL}/profile`)
-        console.log('userdata', data)
         setUserData(data)
       } catch (error) {
-        console.log('error',error.response.status)
         setError(error)
         setErrorStatus(error.response.status)
       }
     }
     getUserData()
   }, [])
-
   // ! Handle Button Click & Updated DB
-
   const handleButtonClick = (event) => {
-
     if(event.target.name === "likes") {
       const updateLikes = async () => {
         try {
           const { data } = await axios.put(`${API_URL}/preferences/likes/${allMovies[count]._id}`)
-          console.log('updatedb - DATA ->', data)
         } catch (error) {
           setError(error)
           setErrorStatus(error.response.status)
@@ -86,7 +68,6 @@ const MovieSwiping = () => {
         const updateDislikes = async () => {
           try {
             const { data } = await axios.put(`${API_URL}/preferences/dislikes/${allMovies[count]._id}`)
-            console.log('updatedb - DATA ->', data)
           } catch (error) {
             setError(error)
             setErrorStatus(error.response.status)
@@ -96,11 +77,10 @@ const MovieSwiping = () => {
       }
       setCount(count + 1)
     }
-  
+
   return (
     <Container className="movieSwiping-wrapper">
     {  errorStatus === 401 ? 
-        // <UnauthorisedMessage/>
         <NeedToLogIn/>
       :
       allMovies ?
@@ -112,7 +92,6 @@ const MovieSwiping = () => {
             <div className="movie-name">
               <h2 id="movies-name">{allMovies[count].name}</h2>
             </div>
-            {/* <p id="year">{allMovies[count].year}</p> */}
             <div className="min-display-container">
               <div className="preference-container">
                 <div className="preferenceButtons">
@@ -129,7 +108,7 @@ const MovieSwiping = () => {
               </div>
               <div className="min-display-button">
                 <Link to={`/movies/${allMovies[count]._id}`}>  
-                  <h2> click for more information</h2>
+                  <button> click for more information</button>
                 </Link>
               </div>
             </div>
@@ -145,72 +124,3 @@ const MovieSwiping = () => {
 }
 
 export default MovieSwiping
-
-  // console.log('movieId[count]', movieId[count])
-  // console.log('typeof movieId[count]', typeof movieId[count])
-  // console.log('movieId', movieId)
-  // console.log('count', count)
-  // console.log('likedMovies', likedMovies)
-  // console.log('moviesDisliked', moviesDisliked)
-  // console.log('allMovies', allMovies)
-  // console.log('typeof allMovies', typeof allMovies)
-  // console.log('movieId', movieId)
-
-  // console.log(count)
-
-
-  
-    // Update Database with Movie Preferences
-    // useEffect(() => {
-    //   const updateDb = async () => {
-    //     try {
-    //       console.log('userpreferences in updatedb useeffect', userPreferences)
-    //       const { data } = await axios.put(`${API_URL}/preferences`, userPreferences)
-    //       console.log('updatedb - DATA ->', data)
-    //     } catch (error) {
-    //       setErrors(error)
-    //     }
-    //   }
-    //   updateDb()
-    // },[count])
-    
-  // const updateMovieLikedPreferences = async () => {
-  //   setUserPreferences(userPreferences.moviesLiked = [...userPreferences.moviesLiked, movieId[count]])
-  //   try {
-  //     const res = await axios.put(`${API_URL}/profile/likes/${username}`, userPreferences)
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
-  // const updateMoviesDislikedPreferences = async () => {
-  //   setUserPreferences(userPreferences.moviesDisliked = [...userPreferences.moviesDisliked, movieId[count]])
-  //   try {
-  //     const res = await axios.put(`${API_URL}/profile/dislikes/${username}`, userPreferences)
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
-
-  // useEffect(()=>{
-  //   const getDisplayMovieData = async () => {
-  //     try {
-  //         // if count === movieId.length then it will break, so we need at a catch for that to say no more movies, please wait for updates
-  //       // if (userPreferences.moviesLiked.includes(allMovieIds[count]) || userPreferences.moviesDisliked.includes(allMovieIds[count])) {
-  //       //   setCount(count+1)
-  //       // } else {
-  //         // console.log('allMovieIds[count]',allMovieIds[count])
-  //         const { data } = await axios.get(`${API_URL}/movies/${allMovieIds[count]}`)
-  //         // allMovies[count]
-  //         console.log('getDisplayMovieData data->', data)
-
-  //         setallMovies[count](data)
-  //       // }   
-  //     } catch (error) {
-  //       console.log('error->',error)
-  //       setErrors(error)
-  //     }
-  //   }
-  //   getDisplayMovieData()
-  // }, [allMovieIds])

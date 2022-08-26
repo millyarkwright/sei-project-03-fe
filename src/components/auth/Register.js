@@ -31,17 +31,15 @@ const Register = () => {
     event.preventDefault()
     try {
       const { data } = await axios.post(`${API_URL}/register/`, formData)
-      console.log('DATA ->', data)
       navigate('/login')
     } catch (err) {
-      console.log('ERROR ->', err)
       setError(err.response.data.message)
     }
   }
   return (
     <main className='formPage'>
       <Container>
-        <Row>
+        <Row className="form-container">
         <form onSubmit={handleSubmit}>
           <h1>Register</h1>
           {/* Username */}

@@ -1,15 +1,14 @@
 .movieSwiping-wrapper {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  height: calc(100% - 110px);
 }
 
 .movieSwipe-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  // margin: 20px 50px 50px 50px;
   padding: 20px;
   height: 90%;
   width: calc(100%*0.8);
@@ -20,8 +19,19 @@
   justify-content: center;
   align-items: center;
   height: 80%;
+  .movieImage {
+    padding: 5px;
+    min-width: 250px;
+    max-width: 400px;
+    // width: 500px;
+    img {
+    border-radius: 5px;
+    margin-left: 0px;
+    // width: calc(100vh*0.4);
+    }
+  }
   .preferenceButtons {
-    margin: 20px 50px;
+    margin: 30px 50px;
     button {
       padding: 30px 50px;
       font-size: 40px;
@@ -29,6 +39,7 @@
       }
   }
 }
+
 
 button#no{
   border-color: red;
@@ -51,25 +62,7 @@ button#no:hover {
   color: black;
 }
 
-.movieImage {
-  padding: 5px;
-}
 
-main{
-  flex-grow: 1;
-}
-
-.movieImage img {
-  border-radius: 5px;
-  width: calc(100vh*0.4);
-}
-
-.preference-container .preferenceButtons button {
-  padding: 30px 50px;
-  /* margin: 0px 20px; */
-  font-size: 40px;
-  border-radius: 50%;
-}
 
 div#movie-details {
   font-size: 20px;
@@ -86,7 +79,26 @@ h2#movies-name {
 .min-display-button{
   display:none;
 }
-@media (max-width: 380px) {
+
+//! break point
+
+@media (max-width: 650px) {
+  .preference-container {
+    .movieImage {
+      min-width: 200px;
+    }
+    .preferenceButtons {
+      margin: 30px 20px;
+      button {
+        padding: 30px 40px;
+        font-size: 30px;
+        }
+    }
+  }
+}
+
+
+@media (max-width: 500px) {
   .preference-container {
     .preferenceButtons {
       button {
@@ -103,7 +115,7 @@ h2#movies-name {
         }
     }
   }
-  .movieImage img {
+  .movieImage {
     display: none;
   }
 
@@ -113,8 +125,20 @@ h2#movies-name {
     text-align: center;
 }
 
-.min-display-button{
-  display:unset;
-  text-align:center
+.min-display-button {
+  display: flex;
+  justify-content: center;
+  button {
+    display:unset;
+    text-align:center;
+    margin: 5px 15px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    background-color: $bgdark;
+    color: $headercolor;
+    border: solid;
+  } a {
+    text-decoration: none;
+  }
   }
 }

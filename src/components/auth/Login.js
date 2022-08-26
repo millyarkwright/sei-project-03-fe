@@ -36,27 +36,25 @@ const Login = () => {
 
     try {
       const { data } = await axios.post(`${API_URL}/login`, userData)
-      // console.log('data->', data)
       const { token } = data
       setToken(token)
       navigate("/swipe")
     } catch (error) {
-      console.log(error.message)
       setIsError(true)
-      setErrorMessage(error.message)
+      setErrorMessage(error.response.data.message)
     }
   }
 
   return (
     <main className='formPage'>
       <Container>
-        <Row>
+        <Row className="form-container">
         <form onSubmit={handleSubmit}>
           <h1>Login</h1>
           <input type="text" name="username" placeholder="Your username" value={userData.username} onChange={handleFieldChange}/>
           <input type="password" name="password" placeholder="Your password" value={userData.password} onChange={handleFieldChange} />
           <input type="submit" value="Login" className='btn w-100'/>
-          {isError && errorMessage}
+          {isError && <h4>{errorMessage}</h4>}
         </form>
         </Row>
       </Container>
