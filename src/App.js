@@ -1,12 +1,7 @@
-import logo from './logo.svg'
-
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import axios from 'axios'
 import { useEffect } from 'react'
-
 import PageNavBar from './components/PageNavBar'
-import Homepage from './components/Homepage'
-import Dashboard from './components/Dashboard'
 import StickyFooterBar from './components/StickyFooterBar'
 import Login from './components/auth/Login'
 import Register from './components/auth/Register'
@@ -15,11 +10,7 @@ import MovieSwiping from './components/MovieSwiping'
 import Match from './components/movies/MovieMatch'
 import ProfilePage from './components/ProfilePage'
 import NotFoundPage from './components/NotFoundPage'
-
-
-
 function App() {
-
   useEffect(() => {
     // if localstorage token exists, set axios default headers to token, if not, set to null
     const token = localStorage.getItem('token')
@@ -29,7 +20,6 @@ function App() {
       axios.defaults.headers.common["Authorization"] = null
     }
   }, [])
-
   return (
     <>
       <div className="site-wrapper">
@@ -37,7 +27,6 @@ function App() {
           <PageNavBar/>
           <Routes>
             <Route path="/" element={<Match />} />
-            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/movies/:movieId" element={<MovieInfo />} />
             <Route path="/login" element={<Login></Login>}></Route>
             <Route path="/register" element={<Register></Register>}></Route>
@@ -52,5 +41,4 @@ function App() {
     </>
   )
 }
-
 export default App

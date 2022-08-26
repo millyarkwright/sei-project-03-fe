@@ -6,5 +6,4 @@ const StickyFooterBar = () => {
     </div>
   )
 }
-
 export default StickyFooterBar

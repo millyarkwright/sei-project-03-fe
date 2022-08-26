@@ -19,10 +19,8 @@ const MovieInfo = () => {
     const getData = async () => {
       try {
         const { data } = await axios.get(`http://localhost:4500/movies/${movieId}`)
-        console.log('data->', data)
         setMovie(data)
       } catch (error) {
-        console.log('error->',error)
         setError(error)
       }
     }
@@ -34,10 +32,7 @@ const MovieInfo = () => {
       {movie ?
         <>
         <Row className="movieInfo-container">
-              {/* <div className="back-button">
-                
-              </div> */}
-          <Col className="movieImage">
+          <Col className="movieInfoImage">
             <Link to={`/swipe`}>  
               <img src={movie.image_url} alt="Movie Poster"></img>
             </Link>

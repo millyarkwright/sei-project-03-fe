@@ -4,7 +4,6 @@ import { Link, useNavigate } from 'react-router-dom'
 // Import React Bootstrap Components
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
-import NavDropdown from 'react-bootstrap/NavDropdown'
 import Container from 'react-bootstrap/Container'
 
 // Import Helpers
@@ -50,18 +49,3 @@ const handleLogout = () => {
 }
 
 export default PageNavBar
-
-
-// ! Testing DropDowns
-
-          // // <NavDropdown title='Menu' id='basic-navbar-nav'>
-          // <>
-          //   {/* <NavDropdown.Item as={Link} to='/swipe'>Movie Swipe</NavDropdown.Item>
-          //   <NavDropdown.Item as={Link} to='/match'>Movie Match</NavDropdown.Item>
-          //   <NavDropdown.Item as={Link} to='/profile'>Profile</NavDropdown.Item> */}
-          //   <Nav.Link as={Link} to='/swipe'>Swipe</Nav.Link>
-          //   <Nav.Link as={Link} to='/match'>Match</Nav.Link>
-          //   <Nav.Link as={Link} to='/profile'>Profile</Nav.Link>
-          //   <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
-          // </>
-          // // </NavDropdown>
