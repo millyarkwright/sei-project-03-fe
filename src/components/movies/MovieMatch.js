@@ -100,7 +100,7 @@ const Match = () => {
     } else {
     navigate(`/movies/${filteredMovies[Math.floor(Math.random() * filteredMovies.length)]}`)}
     } else {
-      setError({ message: 'please enter a valid username to match with'})
+      setError({ message: 'Please enter a valid username'})
     }
   }
 
@@ -121,24 +121,26 @@ return (
   <>
     { errorStatus === 401 ?
       // <UnauthorisedMessage/>
-       <NeedToLogIn/>
+      <NeedToLogIn/>
     :
-    <div className='matchContainer'>
-        <h1> I am Watching With  </h1>
-        <div className='form'>
-          <form onSubmit={handleSubmit}>
-              <input 
-                type='text'
-                name='username' 
-                value={watchWith.username}
-                placeholder='Username' 
-                onChange={handleFieldChange}>
-              </input>
-              <input type='submit' value="Submit" className='btn w-100'/>
-          </form>
-        </div>   
-        <h2> {error && error.message} </h2>
-    </div>
+      <main className="movieMatch">
+        <div className='match-container'>
+          <h1> I am watching with...  </h1>
+          <div className='form'>
+            <form onSubmit={handleSubmit}>
+                <input 
+                  type='text'
+                  name='username' 
+                  value={watchWith.username}
+                  placeholder='Username' 
+                  onChange={handleFieldChange}>
+                </input>
+                <input type='submit' value="Submit" className='btn w-100'/>
+            </form>
+          </div>   
+          <h2> {error && error.message} </h2>
+        </div>
+      </main>
     }  
   </>
 )

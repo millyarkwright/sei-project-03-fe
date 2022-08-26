@@ -1,6 +1,6 @@
 // Import React Hooks & Axios
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import axios from 'axios'
 
 // Import React Bootstrap
@@ -31,30 +31,35 @@ const MovieInfo = () => {
 
   return (
       <Container className="movieInfo-wrapper">
-      { movie ?
-          <>
-          <header className="movieInfo">
-            <h1>{movie.name}</h1>
-            <div className="imdbRating">
-              <p>IMDB RATING</p>
-              <p>⭐️ {movie.rating}/10</p>
-            </div>
-          </header>
-          <Row className="movieInfo-container">
-            <Col className="movieImage" md="4">
+      {movie ?
+        <>
+        <Row className="movieInfo-container">
+              {/* <div className="back-button">
+                
+              </div> */}
+          <Col className="movieImage">
+            <Link to={`/swipe`}>  
               <img src={movie.image_url} alt="Movie Poster"></img>
-            </Col>
-            <Col className="movieDetails" md="8">
-              <div className="genre-container">
-                {movie.genre.map(genre => {
-                return (
-                  <div className="genre" key={genre}>{genre}</div>
-                )
-                })}
-              </div>
-              <p className="lead">{movie.desc}</p>
-              <div>
-                <h4>Stars</h4>
+            </Link>
+          </Col>
+          <Col className="movieDetails" md="8">
+            <header className="movieInfo">
+              <h1>{movie.name}</h1>
+            </header>
+            <div className="genre-container">
+              {movie.genre.map(genre => {
+              return (
+                <div className="genre" key={genre}>{genre}</div>
+              )
+              })}
+              <div className="imdbRating">
+                    <p>IMDB RATING</p>
+                    <p>⭐️ {movie.rating}/10</p>
+                  </div>
+            </div>
+            <p className="lead">{movie.desc}</p>
+            <div className ="actors-and-directors-container">
+              <h4>Stars</h4>
                 <div className="actors-container">
                   {movie.actors.map(actor => {
                   return (
@@ -62,24 +67,29 @@ const MovieInfo = () => {
                   )
                   })}
                 </div>
+                <h4>Directors</h4>
+                <div className="directors-container">
+                  {movie.directors.map(director => {
+                  return (
+                    <p className="directors" key={director}>{director}</p>
+                  )
+                  })}
+                </div>
+            </div>
+              <div className="button-style-div">
+              <Link to={`/swipe`}>  
+                  <button className="back-button">Back To Swipe</button>
+                </Link>
+                  <button className="imdbLink"><a href={`https://www.imdb.com${movie.imdb_url}`}target="_blank" rel="noreferrer">Take me to IMDB</a></button>
               </div>
-              <div className="directors-container">
-                <h4>Director(s)</h4>
-                {movie.directors.map(director => {
-                return (
-                  <p className="directors" key={director}>{director}</p>
-                )
-                })}
-              </div>
-              <button className="imdbLink"><a href={`https://www.imdb.com${movie.imdb_url}`}target="_blank" rel="noreferrer">Take me to IMDb</a></button>
-            </Col>
-          </Row>
-          </>
-          :
-          <h2>
-            {error ? 'Something went wrong. Please try again later.' : 'Loading...'}
-          </h2>
-      }
+          </Col>
+        </Row>
+        </>
+        :
+        <h2 className="errorMessage">
+          {error ? 'Something went wrong. Please try again later.' : 'Loading...'}
+        </h2>
+        }
       </Container>
   )
 }
