@@ -90,7 +90,7 @@ const ProfilePage = () => {
       :
       <Container className="profile-wrapper bg-gradient">
         <Row>
-          <h1>User Profile</h1>
+          <h1>git adProfile</h1>
         </Row>
         <Row className="userDetails">
           <Row>
