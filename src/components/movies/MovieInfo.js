@@ -12,7 +12,8 @@ const MovieInfo = () => {
 
   const { movieId } = useParams()
   const [movie, setMovie] = useState()
-  const [errors, setErrors] = useState('')
+  const [error, setError] = useState('')
+
 
   useEffect(() => {
     const getData = async () => {
@@ -22,7 +23,7 @@ const MovieInfo = () => {
         setMovie(data)
       } catch (error) {
         console.log('error->',error)
-        setErrors(error)
+        setError(error)
       }
     }
     getData()

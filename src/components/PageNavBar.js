@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 // Import React Bootstrap Components
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
+import NavDropdown from 'react-bootstrap/NavDropdown'
 import Container from 'react-bootstrap/Container'
 
 // Import Helpers
@@ -19,18 +20,22 @@ const handleLogout = () => {
   navigate('/login')
 }
   return (
-    <Navbar expand='sm'>
+    <Navbar expand='md'>
       <Container as='section'>
-        <Navbar.Brand as={Link} to='/'>🍿🎬🍿</Navbar.Brand> 
+        { userIsAuthenticated() ?
+          <Navbar.Brand as={Link} to='/match'>🍿🎬🍿</Navbar.Brand> 
+          :
+          <Navbar.Brand as={Link} to='/login'>🍿🎬🍿</Navbar.Brand> 
+        }
         <Navbar.Toggle aria-controls='basic-navbar-nav'></Navbar.Toggle>
         <Navbar.Collapse id='basic-navbar-nav' className='justify-content-end'>
           { userIsAuthenticated()
           ?
           <>
-            <Nav.Link as={Link} to='/swipe'>Movie Swipe</Nav.Link>
-            <Nav.Link as={Link} to='/match'>Movie Match</Nav.Link>
+            <Nav.Link as={Link} to='/swipe'>Swipe</Nav.Link>
+            <Nav.Link as={Link} to='/match'>Match</Nav.Link>
             <Nav.Link as={Link} to='/profile'>Profile</Nav.Link>
-            <span onClick={handleLogout}>Logout</span>
+            <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
           </>
           :
           <>
@@ -45,3 +50,18 @@ const handleLogout = () => {
 }
 
 export default PageNavBar
+
+
+// ! Testing DropDowns
+
+          // // <NavDropdown title='Menu' id='basic-navbar-nav'>
+          // <>
+          //   {/* <NavDropdown.Item as={Link} to='/swipe'>Movie Swipe</NavDropdown.Item>
+          //   <NavDropdown.Item as={Link} to='/match'>Movie Match</NavDropdown.Item>
+          //   <NavDropdown.Item as={Link} to='/profile'>Profile</NavDropdown.Item> */}
+          //   <Nav.Link as={Link} to='/swipe'>Swipe</Nav.Link>
+          //   <Nav.Link as={Link} to='/match'>Match</Nav.Link>
+          //   <Nav.Link as={Link} to='/profile'>Profile</Nav.Link>
+          //   <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+          // </>
+          // // </NavDropdown>

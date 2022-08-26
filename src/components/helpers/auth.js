@@ -2,6 +2,8 @@ import axios from 'axios'
 import { Buffer } from 'buffer'
 // might need to run npm i buffer -> buffer decodes an encoded string 
 
+import { useNavigate } from 'react-router-dom'
+
 // setting token
 
 export const setToken = (token) => {
@@ -42,5 +44,7 @@ export const userIsAuthenticated = () => {
   return currentTime < payload.exp
 }
 
-
-
+// unauthorised to view pages
+export const UnauthorisedMessage = () => {
+  return <h1>You are not authorised to view this page. Please login or create an account.</h1>
+}

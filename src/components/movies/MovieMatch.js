@@ -3,8 +3,10 @@ import { Navigate, useNavigate } from 'react-router-dom'
 import { API_URL } from "../../config.js"
 import axios from 'axios'
 
-const Match = () => {
+import NeedToLogIn from '../helpers/redirect.js'
+// import {UnauthorisedMessage} from '../helpers/auth.js'
 
+const Match = () => {
 
   const navigate = useNavigate()
   // ! State
@@ -12,6 +14,8 @@ const Match = () => {
   const [allUsersAndTheirLikes, setAllUsersAndTheirLikes] = useState([])
   const [watchWith, setWatchWith] = useState({username: ''})
   const [error, setError] = useState()
+  const [errorStatus, setErrorStatus] = useState()
+ 
   // const [userExists, setUserExists] = useState(false)
   const [filteredMovies, setFilteredMovies] = useState([])
   // const [allMoviesStyling, setAllMoviesStyling] = useState('')
@@ -43,6 +47,7 @@ const Match = () => {
       } catch (error) {
         console.log(error)
         setError(error)
+        setErrorStatus(error.response.status)
       }
     }
     getUserData()
@@ -60,11 +65,12 @@ const Match = () => {
       } catch (error) {
         console.log(error)
         setError(setError)
+        setErrorStatus(error.response.status)
       }
     }
     getAllUsersAndTheirLikes()
   }, [])
-  console.log('allUsersAndTheirLikes', allUsersAndTheirLikes)
+  // console.log('allUsersAndTheirLikes', allUsersAndTheirLikes)
 
 
   // ! Executions
@@ -81,7 +87,7 @@ const Match = () => {
 
     const foundUser = allUsersAndTheirLikes.find(user => user.username === watchWith.username)
 
-    console.log('foundUser (handlesub)->',foundUser)
+    // console.log('foundUser (handlesub)->',foundUser)
 
     if (foundUser) {
       const userMoviesLiked = userData.moviesLiked
@@ -102,7 +108,7 @@ const Match = () => {
   //   const userMoviesLiked = userData.moviesLiked
     // const foundUserMoviesLiked = foundUser.moviesLiked
   // console.log(moviesInCommon)
-  console.log(filteredMovies)
+  // console.log(filteredMovies)
   // console.log('allUsersAndTheirLikes', allUsersAndTheirLikes)
   // console.log('foundUser->',foundUser)
   // console.log('error', error)
@@ -112,24 +118,29 @@ const Match = () => {
   // ! JSX
 
 return (
-  <main className="movieMatch">
-    <div className='match-container'>
-      <h1> I am watching with...  </h1>
-      <div className='form'>
-        <form onSubmit={handleSubmit}>
-            <input 
-              type='text'
-              name='username' 
-              value={watchWith.username}
-              placeholder='Username' 
-              onChange={handleFieldChange}>
-            </input>
-            <input type='submit' value="Submit" className='btn w-100'/>
-        </form>
-      </div>   
-      <h2> {error && error.message} </h2>
+  <>
+    { errorStatus === 401 ?
+      // <UnauthorisedMessage/>
+       <NeedToLogIn/>
+    :
+    <div className='matchContainer'>
+        <h1> I am Watching With  </h1>
+        <div className='form'>
+          <form onSubmit={handleSubmit}>
+              <input 
+                type='text'
+                name='username' 
+                value={watchWith.username}
+                placeholder='Username' 
+                onChange={handleFieldChange}>
+              </input>
+              <input type='submit' value="Submit" className='btn w-100'/>
+          </form>
+        </div>   
+        <h2> {error && error.message} </h2>
     </div>
-  </main>
+    }  
+  </>
 )
 }
 
