@@ -66,7 +66,7 @@ const MovieInfo = () => {
                   )
                   })}
                 </div>
-                <h4>Director(s)</h4>
+                <h4>Directors</h4>
                 <div className="directors-container">
                   {movie.directors.map(director => {
                   return (

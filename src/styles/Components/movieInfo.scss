@@ -1,4 +1,8 @@
 
+.movieInfo-wrapper {
+  margin-top: 30px;
+}
+
 header {
   display: flex;
   // padding: 15px 50px;
@@ -18,7 +22,7 @@ header {
 }
 
 .movieInfo-container  {
-  margin: 0px 50px 50px 50px;
+  // margin: 50px 50px 50px 50px;
   display: flex;
   align-items: flex-start;
 }
