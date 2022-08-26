@@ -24,7 +24,7 @@ const handleLogout = () => {
         { userIsAuthenticated() ?
           <Navbar.Brand as={Link} to='/match'>🍿 Watch<span>it</span> 🍿</Navbar.Brand> 
           :
-          <Navbar.Brand as={Link} to='/login'>🍿 Watch<span>it</span> 🍿</Navbar.Brand> 
+          <Navbar.Brand as={Link} to='/'>🍿 Watch<span>it</span> 🍿</Navbar.Brand> 
         }
         <Navbar.Toggle aria-controls='basic-navbar-nav'></Navbar.Toggle>
         <Navbar.Collapse id='basic-navbar-nav' className='justify-content-end'>
