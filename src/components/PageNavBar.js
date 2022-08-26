@@ -32,6 +32,7 @@ const handleLogout = () => {
           { userIsAuthenticated()
           ?
           <>
+            <Nav.Link as={Link} to='/'>Swipe</Nav.Link>
             <Nav.Link as={Link} to='/swipe'>Swipe</Nav.Link>
             <Nav.Link as={Link} to='/match'>Match</Nav.Link>
             <Nav.Link as={Link} to='/profile'>Profile</Nav.Link>
