@@ -41,9 +41,9 @@ const Login = () => {
       setToken(token)
       navigate("/swipe")
     } catch (error) {
-      console.log(error.message)
+      console.log('error message',error.response.data.message)
       setIsError(true)
-      setErrorMessage(error.message)
+      setErrorMessage(error.response.data.message)
     }
   }
 
@@ -56,7 +56,7 @@ const Login = () => {
           <input type="text" name="username" placeholder="Your username" value={userData.username} onChange={handleFieldChange}/>
           <input type="password" name="password" placeholder="Your password" value={userData.password} onChange={handleFieldChange} />
           <input type="submit" value="Login" className='btn w-100'/>
-          {isError && errorMessage}
+          {isError && <h4>{errorMessage}</h4>}
         </form>
         </Row>
       </Container>

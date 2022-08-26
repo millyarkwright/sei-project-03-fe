@@ -129,7 +129,7 @@ const MovieSwiping = () => {
               </div>
               <div className="min-display-button">
                 <Link to={`/movies/${allMovies[count]._id}`}>  
-                  <h2> click for more information</h2>
+                  <button> click for more information</button>
                 </Link>
               </div>
             </div>
