@@ -36,7 +36,7 @@ function App() {
         <BrowserRouter>
           <PageNavBar/>
           <Routes>
-            <Route path="/" element={<Homepage />} />
+            <Route path="/" element={<Match />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/movies/:movieId" element={<MovieInfo />} />
             <Route path="/login" element={<Login></Login>}></Route>

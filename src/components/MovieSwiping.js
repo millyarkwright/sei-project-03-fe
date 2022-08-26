@@ -98,7 +98,7 @@ const MovieSwiping = () => {
     }
   
   return (
-    <Container>
+    <Container className="movieSwiping-wrapper">
     {  errorStatus === 401 ? 
         // <UnauthorisedMessage/>
         <NeedToLogIn/>

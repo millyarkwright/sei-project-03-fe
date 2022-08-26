@@ -86,7 +86,7 @@ const MovieInfo = () => {
         </Row>
         </>
         :
-        <h2>
+        <h2 className="errorMessage">
           {error ? 'Something went wrong. Please try again later.' : 'Loading...'}
         </h2>
         }

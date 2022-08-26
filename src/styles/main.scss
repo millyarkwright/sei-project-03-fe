@@ -1,7 +1,9 @@
 @import './base';
 @import './variables';
 @import './common/formPages.scss';
-@import './components/importedMovieSwipe';
+@import './common/errorMessage.scss';
+
+@import './components/movieSwipe';
 @import './components/movieMatch';
 @import './components/movieInfo';
 @import './components/navBar.scss';
