@@ -88,7 +88,7 @@ const ProfilePage = () => {
         // <UnauthorisedMessage/>
         <NeedToLogIn/>
       :
-      <Container className="profile-wrapper bg-gradient">
+      <Container className="profile-wrapper">
         <Row>
           <h1>Profile</h1>
         </Row>

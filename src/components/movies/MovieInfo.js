@@ -87,7 +87,7 @@ const MovieInfo = () => {
         </>
         :
         <h2>
-          {errors ? 'Something went wrong. Please try again later.' : 'Loading...'}
+          {error ? 'Something went wrong. Please try again later.' : 'Loading...'}
         </h2>
         }
       </Container>
