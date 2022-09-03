@@ -1,15 +1,23 @@
-.homepage-text {
-  padding: 30px 100px;
+.homepage-wrapper {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+}
+
+.homepage-container {
+  display: flex;
+  justify-content: center;
   flex-direction: column;
-  p {
-    text-align: left;
+  max-width: 1000px;
+  h1,h3{
+    text-align: center;
+  }
+  .homepage-problem, .homepage-solution{
+    margin-top: 10px;
   }
 }
 
-
 .watchit-title {
+  margin-top: 30px;
   margin-bottom: 30px;
 }
