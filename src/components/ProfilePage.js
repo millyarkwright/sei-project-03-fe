@@ -10,6 +10,7 @@ import Container from 'react-bootstrap/Container'
 // Import Helpers
 import NeedToLogIn from './helpers/redirect.js'
 // import { UnauthorisedMessage } from "./helpers/auth.js"
+
 const ProfilePage = () => {
   const [userInfo, setUserInfo] = useState([])
   const [userPasswords, setUserPasswords] = useState({
@@ -41,6 +42,7 @@ const ProfilePage = () => {
     }
     getMovieData()
   }, [])
+  
   const handleChange = (event) => {
     const newObj = { ...userPasswords, [event.target.name]: event.target.value }
     setUserPasswords(newObj)

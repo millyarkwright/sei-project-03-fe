@@ -7,6 +7,7 @@ import axios from 'axios'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
+import { API_URL } from '../../config'
 
 const MovieInfo = () => {
 
@@ -18,7 +19,7 @@ const MovieInfo = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const { data } = await axios.get(`http://localhost:4500/movies/${movieId}`)
+        const { data } = await axios.get(`${API_URL}/movies/${movieId}`)
         setMovie(data)
       } catch (error) {
         setError(error)

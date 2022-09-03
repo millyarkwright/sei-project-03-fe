@@ -3,16 +3,18 @@ import { Navigate, useNavigate } from 'react-router-dom'
 import { API_URL } from "../../config.js"
 import axios from 'axios'
 import NeedToLogIn from '../helpers/redirect.js'
+
 const Match = () => {
 
   const navigate = useNavigate()
+
   // ! State
   const [userData, setUserData] = useState()
   const [allUsersAndTheirLikes, setAllUsersAndTheirLikes] = useState([])
   const [watchWith, setWatchWith] = useState({username: ''})
   const [error, setError] = useState()
   const [errorStatus, setErrorStatus] = useState()
-  //  const [filteredMovies, setFilteredMovies] = useState([])
+
   useEffect(() => {
     const getUserData = async () => {
       try {
