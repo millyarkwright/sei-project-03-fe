@@ -20,6 +20,7 @@ const ProfilePage = () => {
   })
   const [error, setError] = useState()
   const [errorStatus, setErrorStatus] = useState()
+
   useEffect(() => {
     const getUserInfo = async () => {
       try {
@@ -32,6 +33,7 @@ const ProfilePage = () => {
     }
     getUserInfo()
   }, [])
+
   useEffect(() => {
     const getMovieData = async () => {
       try {
@@ -47,6 +49,7 @@ const ProfilePage = () => {
     const newObj = { ...userPasswords, [event.target.name]: event.target.value }
     setUserPasswords(newObj)
   }
+  
   const handleFormSubmit = async (event) => {
     event.preventDefault()
     try {
@@ -56,6 +59,7 @@ const ProfilePage = () => {
       setErrorStatus(error.response.status)
     }
   }
+
   return (
     <>
       { errorStatus === 401 ? 

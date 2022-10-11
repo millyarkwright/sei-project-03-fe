@@ -22,9 +22,12 @@ const MovieSwiping = () => {
     const pullMovies = async () => {
       try {
         const { data } = await axios.get(`${API_URL}/movies`)
+        console.log('data', data)
         const filteredData = data.filter(movie => {
-          const movieAlreadyLiked = userData.moviesLiked.map(likedMovie => likedMovie).includes(movie._id)
-          const movieAlreadyDisliked = userData.moviesDisliked.map(dislikedMovie => dislikedMovie).includes(movie._id)
+          // const movieAlreadyLiked = userData.moviesLiked.map(likedMovie => likedMovie).includes(movie._id)
+          const movieAlreadyLiked = userData.moviesLiked.includes(movie._id)
+          // const movieAlreadyDisliked = userData.moviesDisliked.map(dislikedMovie => dislikedMovie).includes(movie._id)
+          const movieAlreadyDisliked = userData.moviesDisliked.includes(movie._id)
           return !(movieAlreadyLiked || movieAlreadyDisliked)
         })
         setAllMovies(filteredData)
@@ -34,11 +37,13 @@ const MovieSwiping = () => {
     }
     pullMovies()
   },[userData])
+
   // If user has been through all movies
   useEffect(() => {
     const moviesRemaining = allMovies.length
     setMoviesRemaining(moviesRemaining)
   },[allMovies])
+
   // ! Get User Data
   useEffect(() => {
     const getUserData = async () => {
@@ -52,7 +57,8 @@ const MovieSwiping = () => {
     }
     getUserData()
   }, [])
-  // ! Handle Button Click & Updated DB
+  
+  // ! Handle Button Click & Update DB
   const handleButtonClick = (event) => {
     if(event.target.name === "likes") {
       const updateLikes = async () => {

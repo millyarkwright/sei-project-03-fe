@@ -27,7 +27,8 @@ const Match = () => {
     }
     getUserData()
   }, [])
-  //   // Get all user preferences
+
+  // Get all user preferences
   useEffect(() => {
     const getAllUsersAndTheirLikes = async () => {
       try {
@@ -40,6 +41,7 @@ const Match = () => {
     }
     getAllUsersAndTheirLikes()
   }, [])
+
   // ! Executions
 
   const handleFieldChange = (event) => {
@@ -50,12 +52,17 @@ const Match = () => {
   const handleSubmit = (event) => {
     event.preventDefault()
     // ERROR TEST
-    const foundUser = allUsersAndTheirLikes.find(user => user.username === watchWith.username)
+    const foundUser = allUsersAndTheirLikes.find(user => watchWith.username === user.username)
     if (foundUser) {
       const userMoviesLiked = userData.moviesLiked
       const foundUserMoviesLiked = foundUser.moviesLiked
+      console.log('userMoviesLiked-->',userMoviesLiked)
+      console.log('foundUserMoviesLiked-->',foundUserMoviesLiked)
       const filteredMovies = userMoviesLiked.filter((movie) => {
-              return foundUserMoviesLiked.includes(movie)
+        console.log('movie -->', movie)
+        console.log('foundUserMoviesLiked.includes(movie) -->', foundUserMoviesLiked.includes('6308a0f76ab8e9f5ff99e1ad'))
+        console.log('foundUserMoviesLiked.includes(movie)',foundUserMoviesLiked.includes(movie))
+        return foundUserMoviesLiked.includes(movie)
     })
     if (filteredMovies.length === 0){
       setError({message: 'Sadly, you have no films in common. Please keep swiping to find a match!' })
