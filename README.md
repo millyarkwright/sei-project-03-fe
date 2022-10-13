@@ -135,7 +135,7 @@ In the frontend, once we had already fetched the user data, we fetched all the m
 
 We then set the ‘allMovies’ state to ‘filteredData’. This meant the user was presented with an array of films they had not yet been shown and could pick up where they left off each time they logged in. 
 
-![MovieSwipe Get All Movie Data & Ids](./screenshots/movieswipe_moviedata.png)
+![MovieSwipe Get All Movie Data & Ids](./screenshots/movieSwipe_moviedata.png)
 
 As this was our first time working with a MERN full stack app, and as we had only been taught it a week previous, it was perhaps inevitable that our code would have a few mistakes. In writing this readMe, we have noticed that the map function used in movieAlreadyLiked and Disliked is redundant. This has subsequently been commented out and rewritten without the map function. 
 
@@ -145,7 +145,7 @@ With allMovies set as our filtered movies array, we know that unless our user ha
 
 Once the user has selected like or dislike, our count (which starts at 0) is updated by 1 and the movie at index 1 (allMovies[1]) will be shown. 
 
-![Handle Button Click & Update Database](./screenshots/movieswipe_handleClick.png)
+![Handle Button Click & Update Database](./screenshots/movieSwipe_handleClick.png)
 
 Our backend works by pushing the movieId to our moviesLiked or moviesDisliked field in our User Model:
 
